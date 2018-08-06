@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { logInAsync } from '../services/authService';
 
 import { MonoText } from '../components/StyledText';
 
@@ -16,6 +17,11 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  async componentDidMount(){
+    let response = await logInAsync();
+    console.log(response);
+  }
 
   render() {
     return (
