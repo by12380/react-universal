@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
-import { logInAsync } from '../services/authService';
+import { autoLogInAsync } from '../services/authService';
 
 import { MonoText } from '../components/StyledText';
 
@@ -19,8 +19,7 @@ export default class HomeScreen extends React.Component {
   };
 
   async componentDidMount(){
-    let response = await logInAsync();
-    console.log(response);
+    await autoLogInAsync();
   }
 
   render() {

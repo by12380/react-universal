@@ -6,6 +6,19 @@ import {
     AUTH0_API_AUDIENCE } from '../config';
 import { AsyncStorage } from "react-native"
 
+async function autoLogInAsync() {
+    const isAuthenticated = await isAuthenticatedAsync();
+    if (!isAuthenticated) {
+        try {
+            const sessionItem = await renewAccessTokenAsync();
+            if (!sessionItem) throw "failed to renew access token";
+        }
+        catch(e) {
+            await logInAsync();
+        }
+    }
+}
+
 async function logInAsync() {
     try {
         const REDIRECT_URI = AuthSession.getRedirectUrl();
@@ -143,6 +156,7 @@ async function renewAccessTokenAsync() {
             expires_in,
             refresh_token
         }
+        console.log(authResult);
         return await setSessionAsync(authResult);
     }
     catch(e){
@@ -151,4 +165,4 @@ async function renewAccessTokenAsync() {
     }
 }
 
-module.exports = { logInAsync, getSessionItemsAsync, isAuthenticatedAsync };
+module.exports = { autoLogInAsync, logOutAsync };
