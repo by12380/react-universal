@@ -104,4 +104,38 @@ async function setSessionAsync(authResult) {
     }
 }
 
+async function renewAccessTokenAsync() {
+    try {
+        const sessionItems = await getSessionItemsAsync();
+        const refresh_token = sessionItems.refresh_token;
+        const response = await fetch(`https://${AUTH0_DOMAIN}/oauth/token`,
+        {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'grant_type': 'refresh_token',
+                'client_id': AUTH0_CLIENT_ID,
+                'client_secret': AUTH0_CLIENT_SECRET,
+                'refresh_token': refresh_token
+            }),
+        })
+
+        if (response.status != 200) throw { message: 'failed to renew access token', status: response.status };
+
+        const { access_token, expires_in } = await response.json();
+        const authResult = {
+            access_token,
+            expires_in,
+            refresh_token
+        }
+        return await setSessionAsync(authResult);
+    }
+    catch(e){
+        console.log(e);
+        return null;
+    }
+}
+
 module.exports = { logInAsync, getSessionItemsAsync, isAuthenticatedAsync };
