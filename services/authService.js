@@ -32,7 +32,7 @@ async function logInAsync() {
             `&redirect_uri=${REDIRECT_URI}`
         });
         if (result.type === 'success') {
-            let authResult = await exchangeCodeForTokenAsync(result.params.code);
+            let authResult = await getAccessTokenAsync(result.params.code);
             return await setSessionAsync(authResult);
         }
         else
@@ -82,7 +82,7 @@ async function isAuthenticatedAsync() {
     return new Date().getTime() < expiresAt;
 }
 
-async function exchangeCodeForTokenAsync(code) {
+async function getAccessTokenAsync(code) {
     try {
         const REDIRECT_URI = AuthSession.getRedirectUrl();
         let response = await fetch(`https://${AUTH0_DOMAIN}/oauth/token`, {
