@@ -34,6 +34,19 @@ async function logInAsync() {
     }
 }
 
+async function logOutAsync() {
+    try {
+        // Logout from Auth0
+        await fetch(`https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`);
+
+        // Clear Access Token and ID Token from local storage
+        await AsyncStorage.multiRemove(['access_token', 'refresh_token', 'expires_at']);
+    }
+    catch(e) {
+        console.error(e);
+    }
+}
+
 async function getSessionItemsAsync() {
     try {
         const sessionItems = {
