@@ -4,6 +4,7 @@ import {
     AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET,
     AUTH0_API_AUDIENCE } from '../config';
+import { AsyncStorage } from "react-native"
 
 async function logInAsync() {
     try {
@@ -18,7 +19,8 @@ async function logInAsync() {
             `&redirect_uri=${REDIRECT_URI}`
         });
         if (result.type === 'success') {
-            return await exchangeCodeForTokenAsync(result.params.code);
+            let authResult = await exchangeCodeForTokenAsync(result.params.code);
+            return await setSessionAsync(authResult);
         }
         else
         {
@@ -30,6 +32,28 @@ async function logInAsync() {
       console.error(e);
       return {error: true};
     }
+}
+
+async function getSessionItemsAsync() {
+    try {
+        const sessionItems = {
+            'access_token': await AsyncStorage.getItem('access_token'),
+            'refresh_token': await AsyncStorage.getItem('refresh_token'),
+            'expires_at': await AsyncStorage.getItem('expires_at'),
+        }
+        return sessionItems;
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
+
+async function isAuthenticatedAsync() {
+    // Check whether the current time is past the
+    // Access Token's expiry time
+    let expiresAt = JSON.parse(await AsyncStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
 }
 
 async function exchangeCodeForTokenAsync(code) {
@@ -57,4 +81,27 @@ async function exchangeCodeForTokenAsync(code) {
     }
 }
 
-module.exports = { logInAsync };
+async function setSessionAsync(authResult) {
+    // Set the time that the Access Token will expire at
+    const expires_at = JSON.stringify((authResult.expires_in * 1000) + new Date().getTime());
+    const access_token = authResult.access_token;
+    const refresh_token = authResult.refresh_token;
+
+    try {
+        await AsyncStorage.setItem('access_token', access_token);
+        await AsyncStorage.setItem('refresh_token', refresh_token);
+        await AsyncStorage.setItem('expires_at', expires_at);
+        return {
+            access_token,
+            refresh_token,
+            expires_at
+        }
+    }
+    catch(e)
+    {
+        console.error(e);
+        return null;
+    }
+}
+
+module.exports = { logInAsync, getSessionItemsAsync, isAuthenticatedAsync };
