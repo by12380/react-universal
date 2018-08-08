@@ -1,11 +1,22 @@
 var createError = require('http-errors');
 var express = require('express');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
-var { PORT } = require('./config');
+var { PORT, DATABASE_URL } = require('./config');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+mongoose.Promise = global.Promise;
+
+//Connect to mongodb
+mongoose
+  .connect(DATABASE_URL)
+  .then(() => {
+    console.log(`Connection to database successful!`);
+  })
+  .catch(err => console.log(`Error connecting to database: ${err}`));
 
 app.use(logger('dev'));
 app.use(express.json());
