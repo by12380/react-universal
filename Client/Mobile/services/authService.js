@@ -22,11 +22,12 @@ async function autoLogInAsync() {
 async function logInAsync() {
     try {
         const REDIRECT_URI = AuthSession.getRedirectUrl();
+        const scopes = ['offline_access', 'openid', 'profile'];
         let result = await AuthSession.startAsync({
             authUrl:
             `https://${AUTH0_DOMAIN}/authorize?` +
             `&audience=${AUTH0_API_AUDIENCE}` +
-            `&scope=offline_access` +
+            `&scope=${encodeURIComponent(scopes.join(' '))}` +
             `&response_type=code` +
             `&client_id=${AUTH0_CLIENT_ID}` +
             `&redirect_uri=${REDIRECT_URI}`
@@ -165,4 +166,4 @@ async function renewAccessTokenAsync() {
     }
 }
 
-module.exports = { autoLogInAsync, logOutAsync };
+module.exports = { autoLogInAsync, logOutAsync, getSessionItemsAsync };
