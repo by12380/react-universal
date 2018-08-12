@@ -10,16 +10,33 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import { autoLogInAsync } from '../services/authService';
+import { getUserProfileFromAuth0Async } from '../services/userService';
 
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: null,
+      picture: null
+    }
+  }
+
   static navigationOptions = {
     header: null,
   };
 
-  async componentDidMount(){
+  async componentDidMount() {
     await autoLogInAsync();
+    const profile = await getUserProfileFromAuth0Async();
+
+    this.setState({
+      name: profile.name,
+      picture: profile.picture
+    })
   }
 
   render() {
@@ -27,14 +44,10 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
+            {this.state.picture ? <Image
+              source={{uri: this.state.picture}}
               style={styles.welcomeImage}
-            />
+            /> : null}
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -47,7 +60,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+              Welcome {this.state.name}
             </Text>
           </View>
 
