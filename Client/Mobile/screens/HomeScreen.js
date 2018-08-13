@@ -6,8 +6,9 @@ import {
   StyleSheet,
   Text,
   View,
+  Button
 } from 'react-native';
-import { autoLogInAsync } from '../services/authService';
+import { isAuthenticatedAsync, logOutAsync } from '../services/authService';
 import { getUserProfileFromAuth0Async } from '../services/userService';
 
 import { MonoText } from '../components/StyledText';
@@ -28,13 +29,17 @@ export default class HomeScreen extends React.Component {
   };
 
   async componentDidMount() {
-    await autoLogInAsync();
-    const profile = await getUserProfileFromAuth0Async();
-
-    this.setState({
-      name: profile.name,
-      picture: profile.picture
-    })
+    const isAuthenticated = await isAuthenticatedAsync();
+    if (isAuthenticated) {
+      const profile = await getUserProfileFromAuth0Async();
+      this.setState({
+        name: profile.name,
+        picture: profile.picture
+      })
+    }
+    else {
+      this.props.navigation.navigate('LogIn');
+    }
   }
 
   render() {
@@ -57,6 +62,7 @@ export default class HomeScreen extends React.Component {
                 </Text>
               : null}
           </View>
+          <Button onPress={this._onLogOut} title='Logout'></Button>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -69,8 +75,13 @@ export default class HomeScreen extends React.Component {
       </View>
     );
   }
-}
 
+  _onLogOut = async () => {
+    await logOutAsync();
+    this.props.navigation.navigate('LogIn');
+  }
+
+}
 
 
 const styles = StyleSheet.create({
