@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
@@ -44,30 +43,20 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            {this.state.picture ? <Image
-              source={{uri: this.state.picture}}
-              style={styles.welcomeImage}
-            /> : null}
+            {this.state.picture
+            ? <Image
+                source={{uri: this.state.picture}}
+                style={styles.welcomeImage}
+              />
+            : null}
           </View>
 
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Welcome {this.state.name}
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
+            {this.state.name
+              ? <Text style={styles.getStartedText}>
+                  Welcome, {this.state.name}
+                </Text>
+              : null}
           </View>
         </ScrollView>
 
@@ -116,6 +105,8 @@ export default class HomeScreen extends React.Component {
   };
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -133,12 +124,13 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20,
   },
   welcomeImage: {
+    borderRadius: 50,
     width: 100,
-    height: 80,
+    height: 100,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
