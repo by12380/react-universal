@@ -29,17 +29,11 @@ export default class HomeScreen extends React.Component {
   };
 
   async componentDidMount() {
-    const isAuthenticated = await isAuthenticatedAsync();
-    if (isAuthenticated) {
-      const profile = await getUserProfileFromAuth0Async();
-      this.setState({
-        name: profile.name,
-        picture: profile.picture
-      })
-    }
-    else {
-      this.props.navigation.navigate('LogIn');
-    }
+    const profile = await getUserProfileFromAuth0Async();
+    this.setState({
+      name: profile.name,
+      picture: profile.picture
+    })
   }
 
   render() {
