@@ -166,4 +166,4 @@ async function renewAccessTokenAsync() {
     }
 }
 
-module.exports = { autoLogInAsync, logOutAsync, getSessionItemsAsync };
+module.exports = { autoLogInAsync, logInAsync, logOutAsync, isAuthenticatedAsync, getSessionItemsAsync };
