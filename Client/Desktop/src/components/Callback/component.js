@@ -35,7 +35,6 @@ class Callback extends Component {
 
     redirectToLogin() {
         if (this.props.error) {
-            console.log('hi');
             return <Redirect to='/login' />
         }
     }
