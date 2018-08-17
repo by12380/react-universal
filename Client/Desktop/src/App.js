@@ -27,7 +27,7 @@ class App extends Component {
           </p>
           <main>
             <div>
-              <Route exact path="/" component={Profile} />
+              <Route exact path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
               <Route exact path="/login" component={LogIn} />
               <Route exact path="/callback" component={Callback} />
             </div>
@@ -38,4 +38,13 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    isAuthenticated:
+      new Date().getTime() <
+      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null)
+  }
+}
+
+export default connect(mapStateToProps)(App);
