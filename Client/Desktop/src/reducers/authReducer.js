@@ -7,14 +7,51 @@ const authReducer = (state = {}, action) => {
             ...state,
             sessionItems: action.sessionItems,
             success: true,
-            error: false
+            error: false,
+            renewPending: false,
+            renewSuccess: false,
+            renewError: false
         };
 
     case "LOGIN_ERROR":
         return {
             ...state,
             success: false,
-            error: true
+            error: true,
+            renewPending: false,
+            renewSuccess: false,
+            renewError: false
+        };
+
+    case "RENEW_TOKEN_PENDING":
+        return {
+            ...state,
+            success: false,
+            error: false,
+            renewPending: true,
+            renewSuccess: false,
+            renewError: false
+        };
+
+    case "RENEW_TOKEN_SUCCESS":
+        return {
+            ...state,
+            success: false,
+            error: false,
+            renewPending: false,
+            renewSuccess: true,
+            renewError: false,
+            sessionItems: action.sessionItems
+        };
+
+    case "RENEW_TOKEN_ERROR":
+        return {
+            ...state,
+            success: false,
+            error: false,
+            renewPending: false,
+            renewSuccess: false,
+            renewError: true,
         };
 
     default:
