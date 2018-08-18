@@ -7,7 +7,7 @@ export const auth = new auth0.WebAuth({
     redirectUri: AUTH0_REDIRECT_URL,
     audience: AUTH0_API_AUDIENCE,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile email'
 });
 
 export const getTokensFromAuthCallbackAsync = () => {
