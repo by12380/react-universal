@@ -5,21 +5,35 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  Button
 } from 'react-native';
-import { WebBrowser } from 'expo';
-import { autoLogInAsync } from '../services/authService';
+import { isAuthenticatedAsync, logOutAsync } from '../services/authService';
+import { getUserProfileFromAuth0Async } from '../services/userService';
 
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: null,
+      picture: null
+    }
+  }
+
   static navigationOptions = {
     header: null,
   };
 
-  async componentDidMount(){
-    await autoLogInAsync();
+  async componentDidMount() {
+    const profile = await getUserProfileFromAuth0Async();
+    this.setState({
+      name: profile.name,
+      picture: profile.picture
+    })
   }
 
   render() {
@@ -27,35 +41,22 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
+            {this.state.picture
+            ? <Image
+                source={{uri: this.state.picture}}
+                style={styles.welcomeImage}
+              />
+            : null}
           </View>
 
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
+            {this.state.name
+              ? <Text style={styles.getStartedText}>
+                  Welcome, {this.state.name}
+                </Text>
+              : null}
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
+          <Button onPress={this._onLogOut} title='Logout'></Button>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -69,63 +70,31 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
+  _onLogOut = async () => {
+    await logOutAsync();
+    this.props.navigation.navigate('LogIn');
   }
 
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20,
   },
   welcomeImage: {
+    borderRadius: 50,
     width: 100,
-    height: 80,
+    height: 100,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
@@ -133,9 +102,6 @@ const styles = StyleSheet.create({
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
   },
   codeHighlightText: {
     color: 'rgba(96,100,109, 0.8)',
@@ -178,16 +144,5 @@ const styles = StyleSheet.create({
   },
   navigationFilename: {
     marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
   },
 });
