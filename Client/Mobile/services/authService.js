@@ -6,16 +6,11 @@ import {
     AUTH0_API_AUDIENCE } from '../config';
 import { AsyncStorage } from "react-native"
 
-/*Runs auth flow:
-1. Check if user authenticated, if not ->
-2. Renew access token using refresh token, if fails ->
-3. Bring up user login prompt
-*/
 async function autoLogInAsync() {
     const isAuthenticated = await isAuthenticatedAsync();
     if (!isAuthenticated) {
         try {
-            const sessionItem = await _renewAccessTokenAsync();
+            const sessionItem = await renewAccessTokenAsync();
             if (!sessionItem) throw "failed to renew access token";
         }
         catch(e) {
@@ -24,23 +19,21 @@ async function autoLogInAsync() {
     }
 }
 
-//Brings up login prompt and logs in user
 async function logInAsync() {
     try {
         const REDIRECT_URI = AuthSession.getRedirectUrl();
-        const scopes = ['offline_access', 'openid', 'profile'];
         let result = await AuthSession.startAsync({
             authUrl:
             `https://${AUTH0_DOMAIN}/authorize?` +
             `&audience=${AUTH0_API_AUDIENCE}` +
-            `&scope=${encodeURIComponent(scopes.join(' '))}` +
+            `&scope=offline_access` +
             `&response_type=code` +
             `&client_id=${AUTH0_CLIENT_ID}` +
             `&redirect_uri=${REDIRECT_URI}`
         });
         if (result.type === 'success') {
-            let authResult = await _getAccessTokenAsync(result.params.code);
-            return await _setSessionAsync(authResult);
+            let authResult = await getAccessTokenAsync(result.params.code);
+            return await setSessionAsync(authResult);
         }
         else
         {
@@ -67,7 +60,6 @@ async function logOutAsync() {
     }
 }
 
-//Returns user session items including access_token, refresh_token, and expires_at.
 async function getSessionItemsAsync() {
     try {
         const sessionItems = {
@@ -83,7 +75,6 @@ async function getSessionItemsAsync() {
     }
 }
 
-//Returns a boolean checking if user has an active login session
 async function isAuthenticatedAsync() {
     // Check whether the current time is past the
     // Access Token's expiry time
@@ -91,7 +82,7 @@ async function isAuthenticatedAsync() {
     return new Date().getTime() < expiresAt;
 }
 
-async function _getAccessTokenAsync(code) {
+async function getAccessTokenAsync(code) {
     try {
         const REDIRECT_URI = AuthSession.getRedirectUrl();
         let response = await fetch(`https://${AUTH0_DOMAIN}/oauth/token`, {
@@ -116,7 +107,7 @@ async function _getAccessTokenAsync(code) {
     }
 }
 
-async function _setSessionAsync(authResult) {
+async function setSessionAsync(authResult) {
     // Set the time that the Access Token will expire at
     const expires_at = JSON.stringify((authResult.expires_in * 1000) + new Date().getTime());
     const access_token = authResult.access_token;
@@ -139,7 +130,7 @@ async function _setSessionAsync(authResult) {
     }
 }
 
-async function _renewAccessTokenAsync() {
+async function renewAccessTokenAsync() {
     try {
         const sessionItems = await getSessionItemsAsync();
         const refresh_token = sessionItems.refresh_token;
@@ -166,7 +157,7 @@ async function _renewAccessTokenAsync() {
             refresh_token
         }
         console.log(authResult);
-        return await _setSessionAsync(authResult);
+        return await setSessionAsync(authResult);
     }
     catch(e){
         console.log(e);
@@ -174,4 +165,4 @@ async function _renewAccessTokenAsync() {
     }
 }
 
-module.exports = { autoLogInAsync, logInAsync, logOutAsync, isAuthenticatedAsync, getSessionItemsAsync };
+module.exports = { autoLogInAsync, logOutAsync };
