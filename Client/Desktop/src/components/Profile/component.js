@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { logOut } from '../../utils/auth0';
 import './Profile.css';
 
 class Profile extends Component {
@@ -17,6 +18,8 @@ class Profile extends Component {
                 { this.props.profile.name
                 ? <p>Welcome, {this.props.profile.name}</p>
                 : null }
+
+                <button onClick={logOut}>Logout</button>
             </div>
         );
     }
