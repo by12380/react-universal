@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { auth, logIn } from '../../utils/auth0';
+import { logIn } from '../../utils/auth0';
+import './LogIn.css';
 
 class LogIn extends Component {
 
@@ -21,8 +22,7 @@ class LogIn extends Component {
     render() {
         return (
             <div>
-                <p>LogIn page</p>
-                <button onClick={logIn}>
+                <button className='login-btn' onClick={logIn}>
                     Log In
                 </button>
             </div>
