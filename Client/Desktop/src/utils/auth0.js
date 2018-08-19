@@ -1,5 +1,5 @@
 import auth0 from 'auth0-js';
-import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_API_AUDIENCE, AUTH0_REDIRECT_URL } from '../config';
+import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_API_AUDIENCE, AUTH0_REDIRECT_URL, HOME_URL } from '../config';
 
 export const auth = new auth0.WebAuth({
     domain: AUTH0_DOMAIN,
@@ -9,6 +9,12 @@ export const auth = new auth0.WebAuth({
     responseType: 'token id_token',
     scope: 'openid profile email'
 });
+
+export const logOut = () => {
+    auth.logout({
+        returnTo: HOME_URL
+    });
+}
 
 export const getTokensFromAuthCallbackAsync = () => {
     return new Promise((resolve, reject) => {
