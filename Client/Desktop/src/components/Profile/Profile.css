@@ -2,3 +2,13 @@
     width: 200px;
     border-radius: 50%;
 }
+
+.logout-btn {
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background-color: darkblue;
+    font-size: 14px;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+}
