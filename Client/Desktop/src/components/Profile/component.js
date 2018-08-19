@@ -19,7 +19,7 @@ class Profile extends Component {
                 ? <p>Welcome, {this.props.profile.name}</p>
                 : null }
 
-                <button onClick={logOut}>Logout</button>
+                <button className='logout-btn' onClick={logOut}>Logout</button>
             </div>
         );
     }
