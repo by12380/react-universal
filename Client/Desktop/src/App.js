@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Profile from './components/Profile';
 import LogIn from './components/LogIn';
 import Callback from './components/Callback';
+import { loadSession } from './actions/authActions';
 
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    props.loadSession();
+  }
+
   render() {
     return (
       <Router>
@@ -20,7 +29,7 @@ class App extends Component {
           <main>
             <div>
               <Route exact path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
-              <Route exact path="/login" component={LogIn} />
+              <Route exact path="/login" render={() => !this.props.isAuthenticated ? <LogIn /> : <Redirect to='/' />} />
               <Route exact path="/callback" component={Callback} />
             </div>
           </main>
@@ -34,8 +43,16 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated:
       new Date().getTime() <
-      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null)
+      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+
+  return bindActionCreators({
+    loadSession
+  }, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
