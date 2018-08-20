@@ -4,11 +4,7 @@ import './LogIn.css';
 
 class LogIn extends Component {
 
-    componentDidMount() {
-        this.autoLogIn()
-    }
-
-    autoLogIn() {
+    onLogin = () => {
         //If renew access token fails, start login prompt
         if (this.props.renewError) {
             logIn();
@@ -22,7 +18,7 @@ class LogIn extends Component {
     render() {
         return (
             <div>
-                <button className='login-btn' onClick={logIn}>
+                <button className='login-btn' onClick={this.onLogin}>
                     Log In
                 </button>
             </div>
