@@ -54,6 +54,31 @@ const authReducer = (state = {}, action) => {
             renewError: true,
         };
 
+    case "LOAD_SESSION_PENDING":
+        return {
+            ...state,
+            sessionPending: true,
+            sessionSuccess: false,
+            sessionError: false
+        };
+
+    case "LOAD_SESSION_SUCCESS":
+        return {
+            ...state,
+            sessionPending: false,
+            sessionSuccess: true,
+            sessionError: false,
+            sessionItems: action.sessionItems
+        };
+
+    case "LOAD_SESSION_ERROR":
+        return {
+            ...state,
+            sessionPending: false,
+            sessionSuccess: false,
+            sessionError: true
+        };
+
     default:
         return state;
     }

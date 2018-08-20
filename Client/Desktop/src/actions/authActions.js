@@ -1,6 +1,8 @@
 import { auth } from '../utils/auth0';
+import { storeSession, getSessionAsync } from '../utils/session';
 
 export const loginSuccess = (sessionItems) => {
+    storeSession(sessionItems);
     return {
         type: 'LOGIN_SUCCESS',
         sessionItems
@@ -32,6 +34,25 @@ export const renewTokenError = () => {
     };
 };
 
+export const loadSessionPending = () => {
+    return {
+        type: 'LOAD_SESSION_PENDING'
+    };
+};
+
+export const loadSessionSuccess = (sessionItems) => {
+    return {
+        type: 'LOAD_SESSION_SUCCESS',
+        sessionItems
+    };
+};
+
+export const loadSessionError = () => {
+    return {
+        type: 'LOAD_SESSION_ERROR'
+    };
+};
+
 export const renewToken = () => (dispatch) => {
     dispatch(renewTokenPending());
     auth.checkSession({}, (err, authResult) => {
@@ -46,6 +67,18 @@ export const renewToken = () => (dispatch) => {
             }
             dispatch(renewTokenSuccess(sessionItems));
         }
+    })
+}
+
+export const loadSession = () => (dispatch) => {
+    dispatch(loadSessionPending())
+    getSessionAsync()
+    .then(sessionItems => {
+        console.log(sessionItems);
+        dispatch(loadSessionSuccess(sessionItems));
+    })
+    .catch(error => {
+        dispatch(loadSessionError());
     })
 }
 
