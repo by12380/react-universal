@@ -24,3 +24,7 @@ export const getTokensFromAuthCallbackAsync = () => {
         });
     })
 };
+
+export const logIn = () => {
+    auth.authorize();
+}
