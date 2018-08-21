@@ -16,3 +16,14 @@ export const getSessionAsync = () => {
         });
     })
 }
+
+export const removeSessionAsync = () => {
+    return new Promise((resolve, reject) => {
+        storage.remove('session', function(error) {
+            if (error) {
+                reject(error);
+            }
+            resolve();
+        });
+    })
+}
