@@ -79,6 +79,30 @@ const authReducer = (state = {}, action) => {
             sessionError: true
         };
 
+    case "REMOVE_SESSION_PENDING":
+        return {
+            ...state,
+            removePending: true,
+            removeSuccess: false,
+            removeError: false
+        };
+
+    case "REMOVE_SESSION_SUCCESS":
+        return {
+            ...state,
+            removePending: false,
+            removeSuccess: true,
+            removeError: false,
+        };
+
+    case "REMOVE_SESSION_ERROR":
+        return {
+            ...state,
+            removePending: false,
+            removeSuccess: false,
+            removeError: true
+        };
+
     default:
         return state;
     }

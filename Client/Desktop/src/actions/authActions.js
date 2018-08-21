@@ -1,5 +1,5 @@
 import { auth } from '../utils/auth0';
-import { storeSession, getSessionAsync } from '../utils/session';
+import { storeSession, getSessionAsync, removeSessionAsync } from '../utils/session';
 
 export const loginSuccess = (sessionItems) => {
     storeSession(sessionItems);
@@ -53,6 +53,24 @@ export const loadSessionError = () => {
     };
 };
 
+export const removeSessionPending = () => {
+    return {
+        type: 'REMOVE_SESSION_PENDING'
+    };
+};
+
+export const removeSessionSuccess = () => {
+    return {
+        type: 'REMOVE_SESSION_SUCCESS',
+    };
+};
+
+export const removeSessionError = () => {
+    return {
+        type: 'REMOVE_SESSION_ERROR'
+    };
+};
+
 export const renewToken = () => (dispatch) => {
     dispatch(renewTokenPending());
     auth.checkSession({}, (err, authResult) => {
@@ -74,11 +92,21 @@ export const loadSession = () => (dispatch) => {
     dispatch(loadSessionPending())
     getSessionAsync()
     .then(sessionItems => {
-        console.log(sessionItems);
         dispatch(loadSessionSuccess(sessionItems));
     })
     .catch(error => {
         dispatch(loadSessionError());
+    })
+}
+
+export const removeSession = () => (dispatch) => {
+    dispatch(removeSessionPending())
+    removeSessionAsync()
+    .then(() => {
+        dispatch(removeSessionSuccess());
+    })
+    .catch(error => {
+        dispatch(removeSessionError());
     })
 }
 
