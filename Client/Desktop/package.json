@@ -1,7 +1,6 @@
 {
-  "name": "cra-electron",
-  "description": "CRA + Electron sitting in a tree",
-  "author": "Kitze",
+  "name": "react-universal",
+  "description": "",
   "version": "0.2.7",
   "private": true,
   "dependencies": {
