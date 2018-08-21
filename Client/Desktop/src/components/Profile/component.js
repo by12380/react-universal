@@ -8,6 +8,11 @@ class Profile extends Component {
         this.props.fetchUser(this.props.token)
     }
 
+    onLogOut = () => {
+        this.props.removeSession();
+        logOut();
+    }
+
     render() {
         return (
             <div>
@@ -19,7 +24,7 @@ class Profile extends Component {
                 ? <p>Welcome, {this.props.profile.name}</p>
                 : null }
 
-                <button className='logout-btn' onClick={logOut}>Logout</button>
+                <button className='logout-btn' onClick={this.onLogOut}>Logout</button>
             </div>
         );
     }

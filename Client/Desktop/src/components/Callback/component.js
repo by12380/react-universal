@@ -17,7 +17,6 @@ class Callback extends Component {
                 idToken: authResult.idToken,
                 expiresAt: authResult.expiresAt
             }
-        
             this.props.loginSuccess(sessionItems);
 
         })
