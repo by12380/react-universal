@@ -92,7 +92,12 @@ export const loadSession = () => (dispatch) => {
     dispatch(loadSessionPending())
     getSessionAsync()
     .then(sessionItems => {
-        dispatch(loadSessionSuccess(sessionItems));
+        //Check if sessionItems is {} (empty)
+        if (Object.keys(sessionItems).length === 0 && sessionItems.constructor === Object) {
+            dispatch(loadSessionError());
+        } else {
+            dispatch(loadSessionSuccess(sessionItems));
+        }
     })
     .catch(error => {
         dispatch(loadSessionError());
