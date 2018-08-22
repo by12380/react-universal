@@ -9,32 +9,20 @@ import {
   Button
 } from 'react-native';
 import { connect } from "react-redux";
-import { isAuthenticatedAsync, logOutAsync } from '../services/authService';
-import { getUserProfileFromAuth0Async } from '../services/userService';
+import { bindActionCreators } from 'redux';
+import { fetchUser } from '../actions/userActions';
+import { logOutAsync } from '../services/authService';
 
 import { MonoText } from '../components/StyledText';
 
 class HomeScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: null,
-      picture: null
-    }
-  }
-
   static navigationOptions = {
     header: null,
   };
 
-  async componentDidMount() {
-    const profile = await getUserProfileFromAuth0Async();
-    this.setState({
-      name: profile.name,
-      picture: profile.picture
-    })
+  componentDidMount() {
+    this.props.fetchUser(this.props.sessionItems);
   }
 
   render() {
@@ -42,18 +30,18 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            {this.state.picture
+            {this.props.user.picture
             ? <Image
-                source={{uri: this.state.picture}}
+                source={{uri: this.props.user.picture}}
                 style={styles.welcomeImage}
               />
             : null}
           </View>
 
           <View style={styles.getStartedContainer}>
-            {this.state.name
+            {this.props.user.name
               ? <Text style={styles.getStartedText}>
-                  Welcome, {this.state.name}
+                  Welcome, {this.props.user.name}
                 </Text>
               : null}
           </View>
@@ -152,8 +140,18 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
 
   return {
+    sessionItems: state.authReducer.sessionItems,
+    user: state.userReducer.user
   };
 
 };
 
-export default connect(mapStateToProps)(HomeScreen);
+const mapDispatchToProps = (dispatch) => {
+
+  return bindActionCreators({
+    fetchUser
+  }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
