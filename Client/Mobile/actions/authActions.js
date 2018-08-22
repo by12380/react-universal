@@ -29,6 +29,24 @@ export const loginError = () => {
     }
 }
 
+export const logoutPending = () => {
+    return {
+        type: 'LOGOUT_PENDING'
+    }
+}
+
+export const logoutSuccess = () => {
+    return {
+        type: 'LOGOUT_SUCCESS'
+    }
+}
+
+export const logoutError = () => {
+    return {
+        type: 'LOGOUT_ERROR'
+    }
+}
+
 export const fetchAccessTokenPending = () => {
     return {
         type: 'FETCH_ACCESS_TOKEN_PENDING'
@@ -75,6 +93,21 @@ export const login = () => (dispatch) => {
         console.error(error);
         dispatch(loginError());
     })
+}
+
+export const logout = () => (dispatch) => {
+
+    dispatch(logoutPending());
+
+    fetch(`https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`)
+    .then(res => {
+        dispatch(logoutSuccess());
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(logoutError());
+    })
+
 }
 
 export const fetchAccessToken = (code) => (dispatch) => {
