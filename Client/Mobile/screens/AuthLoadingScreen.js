@@ -5,9 +5,9 @@ import {
   View,
   StyleSheet
 } from 'react-native';
-import { isAuthenticatedAsync } from '../services/authService';
+import { connect } from "react-redux";
 
-export default class AuthLoadingScreen extends React.Component {
+class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
     this._bootstrapAsync();
@@ -15,11 +15,10 @@ export default class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const isAuthenticated = await isAuthenticatedAsync();
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(isAuthenticated ? 'Main' : 'Auth');
+    this.props.navigation.navigate(this.props.isAuthenticated ? 'Main' : 'Auth');
   };
 
   // Render any loading content that you like here
@@ -42,3 +41,15 @@ const styles = StyleSheet.create({
       marginTop: 50
   }
 })
+
+const mapStateToProps = (state) => {
+
+  return {
+    isAuthenticated:
+      new Date().getTime() <
+      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
+  };
+
+};
+
+export default connect(mapStateToProps)(AuthLoadingScreen);
