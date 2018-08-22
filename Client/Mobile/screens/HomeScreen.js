@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import { logout } from '../actions/authActions';
 import { fetchUser } from '../actions/userActions';
-import { logOutAsync } from '../services/authService';
 
 import { MonoText } from '../components/StyledText';
 
@@ -23,6 +23,10 @@ class HomeScreen extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser(this.props.sessionItems);
+  }
+
+  componentDidUpdate() {
+    this.redirectToLogin();
   }
 
   render() {
@@ -45,7 +49,7 @@ class HomeScreen extends React.Component {
                 </Text>
               : null}
           </View>
-          <Button onPress={this._onLogOut} title='Logout'></Button>
+          <Button onPress={this.onLogOut} title='Logout'></Button>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -59,9 +63,14 @@ class HomeScreen extends React.Component {
     );
   }
 
-  _onLogOut = async () => {
-    await logOutAsync();
-    this.props.navigation.navigate('LogIn');
+  onLogOut = () => {
+    this.props.logout();
+  }
+
+  redirectToLogin = () => {
+    if (!this.props.isAuthenticated) {
+      this.props.navigation.navigate('LogIn');
+    }
   }
 
 }
@@ -141,7 +150,9 @@ const mapStateToProps = (state) => {
 
   return {
     sessionItems: state.authReducer.sessionItems,
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    isAuthenticated:
+      new Date().getTime() < state.authReducer.sessionItems.expiresAt,
   };
 
 };
@@ -149,7 +160,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({
-    fetchUser
+    fetchUser,
+    logout
   }, dispatch);
 
 };

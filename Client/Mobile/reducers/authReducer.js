@@ -52,6 +52,35 @@ const authReducer = (state = initialState, action) => {
             loginError: true
         }
 
+    case 'LOGOUT_PENDING':
+        return {
+            ...state,
+            logoutPending: true,
+            logoutSuccess: false,
+            logoutError: false
+        }
+
+    case 'LOGOUT_SUCCESS':
+        return {
+            ...state,
+            logoutPending: false,
+            logoutSuccess: true,
+            logoutError: false,
+            sessionItems: {
+                accessToken: '',
+                renewToken: '',
+                expiresAt: ''
+            }
+        }
+
+    case 'LOGOUT_ERROR':
+        return {
+            ...state,
+            logoutPending: false,
+            logoutSuccess: false,
+            logoutError: true
+        }
+
     case 'FETCH_ACCESS_TOKEN_PENDING':
         return {
             ...state,
