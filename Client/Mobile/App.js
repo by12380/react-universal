@@ -6,8 +6,16 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
+import { loadSession } from './actions/authActions';
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    store.dispatch(loadSession());
+  }
+
   state = {
     isLoadingComplete: false,
   };

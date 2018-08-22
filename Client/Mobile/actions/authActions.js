@@ -4,6 +4,7 @@ import {
     AUTH0_CLIENT_ID,
     AUTH0_CLIENT_SECRET,
     AUTH0_API_AUDIENCE } from '../config';
+import { getSessionItemsAsync, setSessionAsync, clearSessionAsync } from '../utils/session';
 
 export const loginPending = () => {
     return {
@@ -66,6 +67,62 @@ export const fetchAccessTokenError = () => {
     }
 }
 
+export const loadSessionPending = () => {
+    return {
+        type: 'LOAD_SESSION_PENDING'
+    }
+}
+
+export const loadSessionSuccess = (sessionItems) => {
+    return {
+        type: 'LOAD_SESSION_SUCCESS',
+        sessionItems
+    }
+}
+
+export const loadSessionError = () => {
+    return {
+        type: 'LOAD_SESSION_ERROR'
+    }
+}
+
+export const storeSessionPending = () => {
+    return {
+        type: 'STORE_SESSION_PENDING'
+    }
+}
+
+export const storeSessionSuccess = (sessionItems) => {
+    return {
+        type: 'STORE_SESSION_SUCCESS',
+        sessionItems
+    }
+}
+
+export const storeSessionError = () => {
+    return {
+        type: 'STORE_SESSION_ERROR'
+    }
+}
+
+export const removeSessionPending = () => {
+    return {
+        type: 'REMOVE_SESSION_PENDING'
+    }
+}
+
+export const removeSessionSuccess = () => {
+    return {
+        type: 'REMOVE_SESSION_SUCCESS'
+    }
+}
+
+export const removeSessionError = () => {
+    return {
+        type: 'REMOVE_SESSION_ERROR'
+    }
+}
+
 export const login = () => (dispatch) => {
     const REDIRECT_URI = AuthSession.getRedirectUrl();
     const scopes = ['offline_access', 'openid', 'profile'];
@@ -101,6 +158,7 @@ export const logout = () => (dispatch) => {
 
     fetch(`https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`)
     .then(res => {
+        dispatch(removeSession());
         dispatch(logoutSuccess());
     })
     .catch(error => {
@@ -137,10 +195,57 @@ export const fetchAccessToken = (code) => (dispatch) => {
             accessToken: result.access_token,
             refreshToken: result.refresh_token
         }
+        dispatch(storeSession(sessionItems));
         dispatch(fetchAccessTokenSuccess(sessionItems));
     })
     .catch(error => {
         console.error(error);
         dispatch(fetchAccessTokenError());
     })
+}
+
+export const loadSession = () => (dispatch) => {
+    dispatch(loadSessionPending());
+    getSessionItemsAsync()
+    .then(sessionItems => {
+        if (sessionItems.accessToken !== null) {
+            dispatch(loadSessionSuccess(sessionItems));
+        } else {
+            dispatch(loadSessionError());
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(loadSessionError());
+    })
+}
+
+export const storeSession = (sessionItems) => (dispatch) => {
+
+    dispatch(storeSessionPending());
+
+    setSessionAsync(sessionItems)
+    .then(result => {
+        dispatch(storeSessionSuccess());
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(storeSessionError());
+    })
+
+}
+
+export const removeSession = () => (dispatch) => {
+    
+    dispatch(removeSessionPending());
+
+    clearSessionAsync()
+    .then(result => {
+        dispatch(removeSessionSuccess());
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(removeSessionError());
+    })
+
 }
