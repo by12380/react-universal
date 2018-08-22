@@ -1,8 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { connect } from "react-redux";
 import { ExpoLinksView } from '@expo/samples';
 
-export default class LinksScreen extends React.Component {
+class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
@@ -25,3 +26,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default connect()(LinksScreen);

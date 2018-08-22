@@ -8,12 +8,13 @@ import {
   View,
   Button
 } from 'react-native';
+import { connect } from "react-redux";
 import { isAuthenticatedAsync, logOutAsync } from '../services/authService';
 import { getUserProfileFromAuth0Async } from '../services/userService';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -146,3 +147,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+
+const mapStateToProps = (state) => {
+
+  return {
+  };
+
+};
+
+export default connect(mapStateToProps)(HomeScreen);

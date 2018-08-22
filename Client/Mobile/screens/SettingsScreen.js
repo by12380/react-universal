@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from "react-redux";
 import { ExpoConfigView } from '@expo/samples';
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'app.json',
   };
@@ -12,3 +13,5 @@ export default class SettingsScreen extends React.Component {
     return <ExpoConfigView />;
   }
 }
+
+export default connect()(SettingsScreen);

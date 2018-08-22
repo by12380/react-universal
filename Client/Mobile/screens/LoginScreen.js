@@ -4,30 +4,32 @@ import {
     Button,
     StyleSheet
 } from 'react-native';
-import { autoLogInAsync, logInAsync, isAuthenticatedAsync } from '../services/authService';
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
+import { login } from '../actions/authActions';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
 
-    async componentDidMount() {
-        await autoLogInAsync();
-        if (await isAuthenticatedAsync()) {
-            this.props.navigation.navigate('Main');
-        }
+    componentDidUpdate() {
+        this.redirectToHome();
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.logInContainer}>
-                    <Button onPress={this._onLogIn} title='Login'></Button>
+                    <Button onPress={this.onLogIn} title='Login'></Button>
                 </View>
             </View>
         );
     }
 
-    _onLogIn = async () => {
-        await logInAsync();
-        if (await isAuthenticatedAsync()) {
+    onLogIn = () => {
+        this.props.login();
+    }
+
+    redirectToHome = () => {
+        if (this.props.isAuthenticated) {
             this.props.navigation.navigate('Main');
         }
     }
@@ -42,3 +44,23 @@ const styles = StyleSheet.create({
         marginTop: 50
     }
 })
+
+const mapStateToProps = (state) => {
+
+    return {
+        isAuthenticated:
+            new Date().getTime() <
+            (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
+    };
+
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return bindActionCreators({
+        login
+    }, dispatch);
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
