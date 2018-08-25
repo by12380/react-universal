@@ -1,8 +1,8 @@
 const initialState = {
-    pending: false,
-    success: false,
-    error: false,
-    profile: {
+    userPending: false,
+    userSuccess: false,
+    userError: false,
+    user: {
         name: '',
         email: '',
         picture: ''
@@ -16,26 +16,26 @@ const userReducer = (state = initialState, action) => {
     case 'FETCH_USER_PENDING':
         return {
             ...state,
-            pending: true,
-            success: false,
-            error: false
+            userPending: true,
+            userSuccess: false,
+            userError: false
         }
 
     case 'FETCH_USER_SUCCESS':
         return {
             ...state,
-            profile: action.profile,
-            pending: false,
-            success: true,
-            error: false
+            user: action.user,
+            userPending: false,
+            userSuccess: true,
+            userError: false
         }
 
     case 'FETCH_USER_ERROR':
         return {
             ...state,
-            pending: false,
-            success: false,
-            error: true
+            userPending: false,
+            userSuccess: false,
+            userError: true
         }
     
     default:

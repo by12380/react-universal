@@ -15,12 +15,12 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                { this.props.profile.picture
-                ? <img className='profile-img' src={this.props.profile.picture} alt='User Profile'/>
+                { this.props.user.picture
+                ? <img className='profile-img' src={this.props.user.picture} alt='User Profile'/>
                 : null }
                 
-                { this.props.profile.name
-                ? <p>Welcome, {this.props.profile.name}</p>
+                { this.props.user.name
+                ? <p>Welcome, {this.props.user.name}</p>
                 : null }
 
                 <button className='logout-btn' onClick={this.onLogOut}>Logout</button>

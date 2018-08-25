@@ -1,36 +1,44 @@
-import { auth } from '../utils/auth0';
+import { AUTH0_DOMAIN } from '../config';
 
-const fetchUserPending = () => {
+export const fetchUserPending = () => {
     return {
         type: 'FETCH_USER_PENDING'
     }
 }
 
-const fetchUserSuccess = (profile) => {
+export const fetchUserSuccess = (user) => {
     return {
         type: 'FETCH_USER_SUCCESS',
-        profile
+        user
     }
 }
 
-const fetchUserError = () => {
+export const fetchUserError = () => {
     return {
         type: 'FETCH_USER_ERROR'
     }
 }
 
 export const fetchUser = (accessToken) => (dispatch) => {
+
     dispatch(fetchUserPending());
-    auth.client.userInfo(accessToken, (err, result) => {
-        if (err) {
-            dispatch(fetchUserError());
-        } else {
-            const profile = { 
-                name: result.name,
-                email: result.email,
-                picture: result.picture
-            }
-            dispatch(fetchUserSuccess(profile));
+
+    fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
         }
     })
+    .then(res => {
+        if (res.status !== 200)
+            throw `failed to get user profile with status ${res.status}`;
+        return res.json();
+    })
+    .then(user => {
+        dispatch(fetchUserSuccess(user));
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(fetchUserError());
+    })
+
 }

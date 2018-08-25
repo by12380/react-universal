@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
     pending: state.userReducer.pending,
     success: state.userReducer.success,
     error: state.userReducer.error,
-    profile: state.userReducer.profile,
+    user: state.userReducer.user,
     token: state.authReducer.sessionItems.accessToken
   };
 
