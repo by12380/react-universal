@@ -1,7 +1,7 @@
 import LogIn from "./component";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { renewToken } from '../../actions/authActions';
+import { login, renewToken } from '../../actions/authActions';
 
 const mapStateToProps = (state) => {
 
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({
+    login,
     renewToken
   }, dispatch);
 

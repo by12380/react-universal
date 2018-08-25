@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { logIn } from '../../utils/auth0';
 import './LogIn.css';
+
 
 class LogIn extends Component {
 
     onLogin = () => {
         //If renew access token fails, start login prompt
         if (this.props.renewError) {
-            logIn();
+            this.props.login();
             return;
         }
 
