@@ -9,8 +9,7 @@ class Profile extends Component {
     }
 
     onLogOut = () => {
-        this.props.removeSession();
-        logOut();
+        this.props.logout()
     }
 
     render() {

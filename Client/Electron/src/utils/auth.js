@@ -26,7 +26,7 @@ export const webAuth = (authUrl, redirectUrl) => {
             win.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
                 if (newUrl.includes(redirectUrl)) {
                     const obj = url.parse(newUrl);
-                    const hashParams = querystring.parse(obj.hash.substring(1));
+                    const hashParams = querystring.parse(obj.hash ? obj.hash.substring(1): null);
                     const queryParams = querystring.parse(obj.query);
                     params = {
                         ...hashParams,
