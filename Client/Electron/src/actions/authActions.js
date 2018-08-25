@@ -1,7 +1,7 @@
 import { auth } from '../utils/auth0';
 import { webAuth } from '../utils/auth';
 import { storeSession, getSessionAsync, removeSessionAsync } from '../utils/session';
-import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_API_AUDIENCE, AUTH0_REDIRECT_URL, AUTH0_CLIENT_SECRET } from '../config';
+import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_API_AUDIENCE, AUTH0_REDIRECT_URL, AUTH0_CLIENT_SECRET, AUTH0_LOGOUT_REDIRECT_URL } from '../config';
 
 export const loginPending = () => {
     return {
@@ -24,6 +24,24 @@ export const loginCancel = () => {
 export const loginError = () => {
     return {
         type: 'LOGIN_ERROR'
+    }
+}
+
+export const logoutPending = () => {
+    return {
+        type: 'LOGOUT_PENDING'
+    }
+}
+
+export const logoutSuccess = () => {
+    return {
+        type: 'LOGOUT_SUCCESS'
+    }
+}
+
+export const logoutError = () => {
+    return {
+        type: 'LOGOUT_ERROR'
     }
 }
 
@@ -129,6 +147,29 @@ export const login = () => (dispatch) => {
         console.error(error);
         dispatch(loginError());
     })
+}
+
+export const logout = () => (dispatch) => {
+
+    const logOutUrl =
+        `https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`;
+
+    dispatch(logoutPending());
+
+    webAuth(logOutUrl, AUTH0_LOGOUT_REDIRECT_URL)
+    .then(result => {
+        if (result.type === 'success') {
+            dispatch(removeSession());
+            dispatch(logoutSuccess());
+        } else {
+            dispatch(logoutError());
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        dispatch(logoutError());
+    })
+
 }
 
 export const fetchAccessToken = (code) => (dispatch) => {
