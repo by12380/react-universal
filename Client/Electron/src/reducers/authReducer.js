@@ -2,26 +2,66 @@ const authReducer = (state = {}, action) => {
 
     switch (action.type) {
 
-    case "LOGIN_SUCCESS":
+    case 'LOGIN_PENDING':
         return {
             ...state,
-            sessionItems: action.sessionItems,
-            success: true,
-            error: false,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: false
-        };
+            loginPending: true,
+            loginSuccess: false,
+            loginCancel: false,
+            loginError: false
+        }
 
-    case "LOGIN_ERROR":
+    case 'LOGIN_SUCCESS':
         return {
             ...state,
-            success: false,
-            error: true,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: false
-        };
+            loginPending: false,
+            loginSuccess: true,
+            loginCancel: false,
+            loginError: false
+        }
+
+    case 'LOGIN_CANCEL':
+        return {
+            ...state,
+            loginPending: false,
+            loginSuccess: false,
+            loginCancel: true,
+            loginError: false
+        }
+
+    case 'LOGIN_ERROR':
+        return {
+            ...state,
+            loginPending: false,
+            loginSuccess: false,
+            loginCancel: false,
+            loginError: true
+        }
+
+    case 'FETCH_ACCESS_TOKEN_PENDING':
+        return {
+            ...state,
+            fetchTokenPending: true,
+            fetchTokenSuccess: false,
+            fetchTokenError: false
+        }
+
+    case 'FETCH_ACCESS_TOKEN_SUCCESS':
+        return {
+            ...state,
+            fetchTokenPending: false,
+            fetchTokenSuccess: true,
+            fetchTokenError: false,
+            sessionItems: action.sessionItems
+        }
+
+    case 'FETCH_ACCESS_TOKEN_ERROR':
+        return {
+            ...state,
+            fetchTokenPending: false,
+            fetchTokenSuccess: false,
+            fetchTokenError: true
+        }
 
     case "RENEW_TOKEN_PENDING":
         return {
