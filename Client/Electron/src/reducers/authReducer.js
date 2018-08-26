@@ -1,4 +1,19 @@
-const authReducer = (state = {}, action) => {
+const initialState = {
+    loginPending: false,
+    loginSuccess: false,
+    loginCancel: false,
+    loginError: false,
+    fetchTokenPending: false,
+    fetchTokenPending: false,
+    fetchTokenError: false,
+    sessionItems: {
+        accessToken: '',
+        refreshToken: '',
+        expiresAt: ''
+    }
+}
+
+const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -17,7 +32,8 @@ const authReducer = (state = {}, action) => {
             loginPending: false,
             loginSuccess: true,
             loginCancel: false,
-            loginError: false
+            loginError: false,
+            refreshError: false
         }
 
     case 'LOGIN_CANCEL':
@@ -54,7 +70,7 @@ const authReducer = (state = {}, action) => {
             logoutError: false,
             sessionItems: {
                 accessToken: '',
-                renewToken: '',
+                refreshToken: '',
                 expiresAt: ''
             }
         }
@@ -92,35 +108,29 @@ const authReducer = (state = {}, action) => {
             fetchTokenError: true
         }
 
-    case "RENEW_TOKEN_PENDING":
+    case "REFRESH_TOKEN_PENDING":
         return {
             ...state,
-            success: false,
-            error: false,
-            renewPending: true,
-            renewSuccess: false,
-            renewError: false
+            refreshPending: true,
+            refreshSuccess: false,
+            refreshError: false
         };
 
-    case "RENEW_TOKEN_SUCCESS":
+    case "REFRESH_TOKEN_SUCCESS":
         return {
             ...state,
-            success: false,
-            error: false,
-            renewPending: false,
-            renewSuccess: true,
-            renewError: false,
+            refreshPending: false,
+            refreshSuccess: true,
+            refreshError: false,
             sessionItems: action.sessionItems
         };
 
-    case "RENEW_TOKEN_ERROR":
+    case "REFRESH_TOKEN_ERROR":
         return {
             ...state,
-            success: false,
-            error: false,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: true,
+            refreshPending: false,
+            refreshSuccess: false,
+            refreshError: true,
         };
 
     case "LOAD_SESSION_PENDING":
