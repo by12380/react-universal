@@ -1,4 +1,3 @@
-import { auth } from '../utils/auth0';
 import { webAuth } from '../utils/auth';
 import { storeSession, getSessionAsync, removeSessionAsync } from '../utils/session';
 import { AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_API_AUDIENCE, AUTH0_REDIRECT_URL, AUTH0_CLIENT_SECRET, AUTH0_LOGOUT_REDIRECT_URL } from '../config';

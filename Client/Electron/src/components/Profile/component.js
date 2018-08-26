@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { logOut } from '../../utils/auth0';
 import './Profile.css';
 
 class Profile extends Component {
