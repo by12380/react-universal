@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 
 import Profile from './components/Profile';
 import LogIn from './components/LogIn';
-import Callback from './components/Callback';
 import { loadSession } from './actions/authActions';
 
 import logo from './logo.svg';
@@ -28,9 +27,8 @@ class App extends Component {
           </div>
           <main>
             <div>
-              <Route exact path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
               <Route exact path="/login" render={() => !this.props.isAuthenticated ? <LogIn /> : <Redirect to='/' />} />
-              <Route exact path="/callback" component={Callback} />
+              <Route path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
             </div>
           </main>
         </div>
