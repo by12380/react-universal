@@ -67,6 +67,25 @@ export const fetchAccessTokenError = () => {
     }
 }
 
+export const refreshTokenPending = () => {
+    return {
+        type: 'REFRESH_TOKEN_PENDING'
+    };
+};
+
+export const refreshTokenSuccess = (sessionItems) => {
+    return {
+        type: 'REFRESH_TOKEN_SUCCESS',
+        sessionItems
+    };
+};
+
+export const refreshTokenError = () => {
+    return {
+        type: 'REFRESH_TOKEN_ERROR'
+    };
+};
+
 export const loadSessionPending = () => {
     return {
         type: 'LOAD_SESSION_PENDING'
@@ -202,6 +221,43 @@ export const fetchAccessToken = (code) => (dispatch) => {
         console.error(error);
         dispatch(fetchAccessTokenError());
     })
+}
+
+export const refreshAccessToken = (refreshToken) => (dispatch) => {
+
+    dispatch(refreshTokenPending());
+
+    fetch(`https://${AUTH0_DOMAIN}/oauth/token`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'grant_type': 'refresh_token',
+            'client_id': AUTH0_CLIENT_ID,
+            'client_secret': AUTH0_CLIENT_SECRET,
+            'refresh_token': refreshToken
+        }),
+    })
+    .then(res => {
+        if (res.status !== 200)
+            throw `failed to refresh token with status ${res.status}`;
+        return res.json();
+    })
+    .then(authResult => {
+        authResult.expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+            const sessionItems = {
+                accessToken: authResult.accessToken,
+                idToken: authResult.idToken,
+                expiresAt: authResult.expiresAt
+            }
+        dispatch(refreshTokenSuccess(sessionItems));
+    })
+    .catch(error => {
+        console.log(error);
+        dispatch(refreshTokenError());
+    })
+
 }
 
 export const loadSession = () => (dispatch) => {

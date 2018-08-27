@@ -106,6 +106,31 @@ const authReducer = (state = initialState, action) => {
             fetchTokenError: true
         }
 
+    case "REFRESH_TOKEN_PENDING":
+        return {
+            ...state,
+            refreshPending: true,
+            refreshSuccess: false,
+            refreshError: false
+        };
+
+    case "REFRESH_TOKEN_SUCCESS":
+        return {
+            ...state,
+            refreshPending: false,
+            refreshSuccess: true,
+            refreshError: false,
+            sessionItems: action.sessionItems
+        };
+
+    case "REFRESH_TOKEN_ERROR":
+        return {
+            ...state,
+            refreshPending: false,
+            refreshSuccess: false,
+            refreshError: true,
+        };
+
     case 'LOAD_SESSION_PENDING':
         return {
             ...state,
