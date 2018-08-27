@@ -156,7 +156,7 @@ export const logout = () => (dispatch) => {
 
     dispatch(logoutPending());
 
-    fetch(`https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`)
+    fetch(`https://${AUTH0_DOMAIN}/v2/logout`)
     .then(res => {
         dispatch(removeSession());
         dispatch(logoutSuccess());
