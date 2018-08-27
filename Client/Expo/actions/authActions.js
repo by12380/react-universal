@@ -162,7 +162,7 @@ export const login = () => (dispatch) => {
             dispatch(fetchAccessToken(result.params.code));
             dispatch(loginSuccess());
         } else {
-            dispatch(loginCanceled());
+            dispatch(loginCancel());
         }
     })
     .catch(error => {
