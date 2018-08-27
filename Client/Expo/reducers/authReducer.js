@@ -31,7 +31,8 @@ const authReducer = (state = initialState, action) => {
             loginPending: false,
             loginSuccess: true,
             loginCancel: false,
-            loginError: false
+            loginError: false,
+            refreshError: false,
         }
 
     case 'LOGIN_CANCEL':
