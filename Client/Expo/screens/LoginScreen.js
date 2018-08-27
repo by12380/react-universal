@@ -6,11 +6,12 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
-import { login } from '../actions/authActions';
+import { login, refreshAccessToken } from '../actions/authActions';
 
 class LoginScreen extends React.Component {
 
     componentDidUpdate() {
+        this.onRefreshTokenError();
         this.redirectToHome();
     }
 
@@ -25,7 +26,13 @@ class LoginScreen extends React.Component {
     }
 
     onLogIn = () => {
-        this.props.login();
+        this.props.refreshAccessToken(this.props.refreshToken);
+    }
+
+    onRefreshTokenError = () => {
+        if (this.props.refreshError) {
+            this.props.login();
+        }
     }
 
     redirectToHome = () => {
@@ -51,6 +58,8 @@ const mapStateToProps = (state) => {
         isAuthenticated:
             new Date().getTime() <
             (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
+        refreshError: state.authReducer.refreshError,
+        refreshToken: state.authReducer.sessionItems.refreshToken
     };
 
 };
@@ -58,7 +67,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return bindActionCreators({
-        login
+        login,
+        refreshAccessToken
     }, dispatch);
 
 };
