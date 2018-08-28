@@ -1,5 +1,4 @@
 const express = require('express');
-const fetch = require('node-fetch');
 
 const { AUTH0_DOMAIN,
         AUTH0_MANAGEMENT_CLIENT_ID,
@@ -10,7 +9,7 @@ const { checkJwt } = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.post('/user/update', checkJwt, async function(req, res){
+router.post('/update', checkJwt, async function(req, res){
 
     const user = {
         user_id: req.user.sub,
@@ -19,7 +18,7 @@ router.post('/user/update', checkJwt, async function(req, res){
       
     try {
         const user_db = await User.findOneAndUpdate(
-          {user_id: resultJson.user_id },
+          {user_id: user.user_id },
           user,
           {upsert: true},
           function(err){
@@ -35,6 +34,7 @@ router.post('/user/update', checkJwt, async function(req, res){
       console.error(e);
       res.status(500).json('Internal server error.');
     }
+
 })
 
 module.exports = router;

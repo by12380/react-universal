@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const cors =  require('cors');
 
 var { PORT, DATABASE_URL } = require('./config');
 var usersRouter = require('./routes/users');
@@ -21,6 +22,7 @@ mongoose
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use('/users', usersRouter);
 
