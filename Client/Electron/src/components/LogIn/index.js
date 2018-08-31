@@ -1,7 +1,7 @@
 import LogIn from "./component";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { login, refreshAccessToken } from '../../actions/authActions';
+import { login, refreshAccessToken } from '../../actions/auth0';
 
 const mapStateToProps = (state) => {
 
