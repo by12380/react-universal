@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { logIn } from '../../utils/auth0';
+import { logIn, refreshAccessToken } from '../../utils/auth0';
 import './LogIn.css';
 
 class LogIn extends Component {
 
-    componentDidUpdate() {
+    componentDidMount() {
         //If renew access token fails, start login prompt
         if (this.props.refreshError) {
             logIn();
@@ -13,7 +13,7 @@ class LogIn extends Component {
     }
 
     onLogin = () => {
-        this.props.refreshAccessToken(this.props.refreshToken);
+        refreshAccessToken();
     }
 
     render() {

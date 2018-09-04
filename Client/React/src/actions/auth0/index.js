@@ -1,77 +1,53 @@
-import { auth } from '../../utils/auth0';
 import {
-        refreshTokenPending,
-        refreshTokenSuccess,
-        refreshTokenError } from '../authActions';
+    AUTH0_DOMAIN,
+    AUTH0_CLIENT_ID,
+    AUTH0_API_AUDIENCE,
+    AUTH0_LOGIN_REDIRECT_URL } from '../../config';
 
 import {
         fetchUserPending,
         fetchUserSuccess,
         fetchUserError,
-        storeUserPending,
-        storeUserSuccess,
-        storeUserError } from '../userActions';
-
-import { APP_SERVER_URL } from '../../config';
+        storeUser } from '../userActions';
 
 export const refreshAccessToken = () => (dispatch) => {
-    dispatch(refreshTokenPending());
-    auth.checkSession({}, (err, authResult) => {
-        if (err) {
-            dispatch(refreshTokenError());
-        } else {
-            authResult.expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-            const sessionItems = {
-                accessToken: authResult.accessToken,
-                idToken: authResult.idToken,
-                expiresAt: authResult.expiresAt
-            }
-            dispatch(refreshTokenSuccess(sessionItems));
-        }
-    })
+
+    const scopes = ['openid', 'profile', 'email'];
+
+    const authUrl =
+        `https://${AUTH0_DOMAIN}/authorize?
+        &audience=${AUTH0_API_AUDIENCE}
+        &scope=${encodeURIComponent(scopes.join(' '))}
+        &response_type=token
+        &client_id=${AUTH0_CLIENT_ID}
+        &redirect_uri=${AUTH0_LOGIN_REDIRECT_URL}
+        &prompt=none`;
+
+     window.location.href = authUrl;
+
 }
 
 export const fetchUser = (accessToken) => (dispatch) => {
+
     dispatch(fetchUserPending());
-    auth.client.userInfo(accessToken, (err, result) => {
-        if (err) {
-            dispatch(fetchUserError());
-        } else {
-            const profile = { 
-                name: result.name,
-                email: result.email,
-                picture: result.picture
-            }
-            dispatch(fetchUserSuccess(profile));
-            dispatch(storeUser(accessToken, profile));
-        }
-    })
-}
 
-export const storeUser = (accessToken, user) => (dispatch) => {
-
-    dispatch(storeUserPending());
-
-    fetch(`${APP_SERVER_URL}/users/update`, {
-        method: 'POST',
+    fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
         headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-            email: user.email,
-        }),
+            Authorization: `Bearer ${accessToken}`
+        }
     })
     .then(res => {
         if (res.status !== 200)
-            throw `failed to store user with status ${res.status}`;
+            throw `failed to get user profile with status ${res.status}`;
         return res.json();
     })
-    .then(result => {
-        dispatch(storeUserSuccess());
+    .then(user => {
+        dispatch(fetchUserSuccess(user));
+        dispatch(storeUser(user));
     })
     .catch(error => {
-        dispatch(storeUserError());
+        console.log(error);
+        dispatch(fetchUserError());
     })
 
 }

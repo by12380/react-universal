@@ -4,27 +4,28 @@ import { getTokensFromAuthCallback } from '../../utils/auth0'
 
 class Callback extends Component {
 
-    async componentDidMount() {
+    componentDidMount() {
         this.handleAuthCallback();
     }
 
     handleAuthCallback = () => {
         getTokensFromAuthCallback()
         .then(authResult => {
-
             const sessionItems = {
-                accessToken: authResult.accessToken,
-                idToken: authResult.idToken,
-                expiresAt: authResult.expiresAt
+                accessToken: authResult.access_token,
+                idToken: authResult.id_token,
+                expiresAt: authResult.expires_at
             }
             this.props.loginSuccess(sessionItems);
-
         })
-        .catch(err => {
-            this.props.loginError();
+        .catch(e => {
+            if (e.error) {
+                this.props.refreshTokenError();
+            } else {
+                this.props.loginError();
+            }
         })
     }
-    
 
     redirectToProfile() {
         if (this.props.success) {
@@ -33,7 +34,7 @@ class Callback extends Component {
     }
 
     redirectToLogin() {
-        if (this.props.error) {
+        if (this.props.error || this.props.refreshError) {
             return <Redirect to='/login' />
         }
     }

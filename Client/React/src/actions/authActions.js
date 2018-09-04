@@ -14,18 +14,6 @@ export const loginError = () => {
     };
 };
 
-export const refreshTokenPending = () => {
-    return {
-        type: 'REFRESH_TOKEN_PENDING'
-    };
-};
-
-export const refreshTokenSuccess = (sessionItems) => {
-    return {
-        type: 'REFRESH_TOKEN_SUCCESS',
-        sessionItems
-    };
-};
 
 export const refreshTokenError = () => {
     return {
