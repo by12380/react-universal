@@ -1,4 +1,3 @@
-import { auth } from '../utils/auth0';
 import { storeSession, getSession, clearSession } from '../utils/session';
 
 export const loginSuccess = (sessionItems) => {
@@ -15,22 +14,22 @@ export const loginError = () => {
     };
 };
 
-export const renewTokenPending = () => {
+export const refreshTokenPending = () => {
     return {
-        type: 'RENEW_TOKEN_PENDING'
+        type: 'REFRESH_TOKEN_PENDING'
     };
 };
 
-export const renewTokenSuccess = (sessionItems) => {
+export const refreshTokenSuccess = (sessionItems) => {
     return {
-        type: 'RENEW_TOKEN_SUCCESS',
+        type: 'REFRESH_TOKEN_SUCCESS',
         sessionItems
     };
 };
 
-export const renewTokenError = () => {
+export const refreshTokenError = () => {
     return {
-        type: 'RENEW_TOKEN_ERROR'
+        type: 'REFRESH_TOKEN_ERROR'
     };
 };
 
@@ -70,23 +69,6 @@ export const removeSessionError = () => {
         type: 'REMOVE_SESSION_ERROR'
     };
 };
-
-export const renewToken = () => (dispatch) => {
-    dispatch(renewTokenPending());
-    auth.checkSession({}, (err, authResult) => {
-        if (err) {
-            dispatch(renewTokenError());
-        } else {
-            authResult.expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-            const sessionItems = {
-                accessToken: authResult.accessToken,
-                idToken: authResult.idToken,
-                expiresAt: authResult.expiresAt
-            }
-            dispatch(renewTokenSuccess(sessionItems));
-        }
-    })
-}
 
 export const loadSession = () => (dispatch) => {
     dispatch(loadSessionPending())

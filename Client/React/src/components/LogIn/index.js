@@ -1,14 +1,14 @@
 import LogIn from "./component";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { renewToken } from '../../actions/authActions';
+import { refreshAccessToken } from '../../actions/auth0';
 
 const mapStateToProps = (state) => {
 
   return {
-    renewPending: state.authReducer.renewPending,
-    renewSuccess: state.authReducer.renewSuccess,
-    renewError: true
+    refreshPending: state.authReducer.refreshPending,
+    refreshSuccess: state.authReducer.refreshSuccess,
+    refreshError: state.authReducer.refreshError
   };
 
 };
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({
-    renewToken
+    refreshAccessToken
   }, dispatch);
 
 };

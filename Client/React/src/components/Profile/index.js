@@ -1,7 +1,7 @@
 import Profile from "./component";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { fetchUser } from '../../actions/userActions';
+import { fetchUser } from '../../actions/auth0';
 import { removeSession } from '../../actions/authActions';
 
 const mapStateToProps = (state) => {

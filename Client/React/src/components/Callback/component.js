@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import { getTokensFromAuthCallbackAsync } from '../../utils/auth0'
+import { getTokensFromAuthCallback } from '../../utils/auth0'
 
 class Callback extends Component {
 
@@ -9,7 +9,7 @@ class Callback extends Component {
     }
 
     handleAuthCallback = () => {
-        getTokensFromAuthCallbackAsync()
+        getTokensFromAuthCallback()
         .then(authResult => {
 
             const sessionItems = {

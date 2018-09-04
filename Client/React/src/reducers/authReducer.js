@@ -8,9 +8,9 @@ const authReducer = (state = {}, action) => {
             sessionItems: action.sessionItems,
             success: true,
             error: false,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: false
+            refreshPending: false,
+            refreshSuccess: false,
+            refreshError: false
         };
 
     case "LOGIN_ERROR":
@@ -18,40 +18,40 @@ const authReducer = (state = {}, action) => {
             ...state,
             success: false,
             error: true,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: false
+            refreshPending: false,
+            refreshSuccess: false,
+            refreshError: false
         };
 
-    case "RENEW_TOKEN_PENDING":
+    case "REFRESH_TOKEN_PENDING":
         return {
             ...state,
             success: false,
             error: false,
-            renewPending: true,
-            renewSuccess: false,
-            renewError: false
+            refreshPending: true,
+            refreshSuccess: false,
+            refreshError: false
         };
 
-    case "RENEW_TOKEN_SUCCESS":
+    case "REFRESH_TOKEN_SUCCESS":
         return {
             ...state,
             success: false,
             error: false,
-            renewPending: false,
-            renewSuccess: true,
-            renewError: false,
+            refreshPending: false,
+            refreshSuccess: true,
+            refreshError: false,
             sessionItems: action.sessionItems
         };
 
-    case "RENEW_TOKEN_ERROR":
+    case "REFRESH_TOKEN_ERROR":
         return {
             ...state,
             success: false,
             error: false,
-            renewPending: false,
-            renewSuccess: false,
-            renewError: true,
+            refreshPending: false,
+            refreshSuccess: false,
+            refreshError: true,
         };
 
     case "LOAD_SESSION_PENDING":

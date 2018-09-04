@@ -4,15 +4,16 @@ import './LogIn.css';
 
 class LogIn extends Component {
 
-    onLogin = () => {
+    componentDidUpdate() {
         //If renew access token fails, start login prompt
-        if (this.props.renewError) {
+        if (this.props.refreshError) {
             logIn();
             return;
         }
+    }
 
-        //Automatically check and renew access token when vist page
-        this.props.renewToken();
+    onLogin = () => {
+        this.props.refreshAccessToken(this.props.refreshToken);
     }
 
     render() {
