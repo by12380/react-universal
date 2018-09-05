@@ -1,6 +1,6 @@
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
-const { AUTH0_DOMAIN, AUTH0_AUDIENCE_API } = require('../config');
+const { AUTH0_DOMAIN, AUTH0_API_AUDIENCE } = require('../config');
 
 const checkJwt = jwt({
     // Dynamically provide a signing key
@@ -14,7 +14,7 @@ const checkJwt = jwt({
     }),
   
     // Validate the audience and the issuer.
-    audience: AUTH0_AUDIENCE_API,
+    audience: AUTH0_API_AUDIENCE,
     issuer: `https://${AUTH0_DOMAIN}/`,
     algorithms: ['RS256']
 });

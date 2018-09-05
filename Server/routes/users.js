@@ -1,9 +1,5 @@
 const express = require('express');
 
-const { AUTH0_DOMAIN,
-        AUTH0_MANAGEMENT_CLIENT_ID,
-        AUTH0_MANAGEMENT_CLIENT_SCERET 
-      } = require('../config');
 const { User } = require('../models/user');
 const { checkJwt } = require('../middlewares/auth');
 
