@@ -1,6 +1,6 @@
 # React Universal App with Social Login Starter Kit
 
-Minimum react-redux starter kit for desktop, mobile, and web app with social login.
+Minimum react-redux starter kit (MERN) for desktop, mobile, and web app with social login feature.
 
 Inspired by creating universal apps like Slack, Skype, etc.
 
@@ -13,7 +13,7 @@ Inspired by creating universal apps like Slack, Skype, etc.
 - Mongo DB (Database) (optional)
 
 ## Social Login
-- Auth0 (Default setup) - to demonstrate multiple social login platforms at once (Google, Facebook, Github, etc...)
+- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms all at once (Google, Facebook, Github, etc...)
 
 ## Getting started
 ```
@@ -21,7 +21,7 @@ git clone https://github.com/by12380/react-universal.git
 cd react-universal
 ```
 ## General Setup
-- Auth0
+- [Auth0](#auth0-setup-for-development)
 - [Web app](./Client/React/)
 - [Electron app](./Client/Electron/)
 - [Expo app](./Client/Expo/)
