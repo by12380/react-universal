@@ -31,6 +31,7 @@ Minimum starter kit for React-Redux mobile app bootstraped with [Expo Cli](https
 cd ./Client/Expo
 yarn
 ```
+\* Steps 1-5 is for using Auth0 as our social login platform
 
 ## Run app
 

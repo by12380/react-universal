@@ -31,6 +31,7 @@ Minimum starter kit for React-Redux desktop app featuring [Electron](https://ele
 cd ./Client/Electron
 yarn
 ```
+\* Steps 1-5 is for using Auth0 as our social login platform
 
 ## Run app
 
