@@ -1,11 +1,54 @@
-# React + Electron = 😍
+# Electron with social login
 
-An example of using create-react-app and Electron.  
-Made by [Kitze](https://twitter.com/thekitze).
+Minimum starter kit for React-Redux desktop app featuring [Electron](https://electronjs.org/) and social login (Auth0)
 
-## Scripts
-```yarn start``` will start the Electron app and the React app at the same time.  
-```yarn build``` will build the React app and package it along the Electron app.
 
-## Read more
-You can read more about it in [my Medium article](https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3).
+## Electron App setup (for development)
+
+1. Sign in Auth0 account
+2. Go to 'Application' -> [Your App Name] -> 'Settings'
+3. Copy
+    - Domain
+    - Client ID
+    - Client Secret
+
+    To `./Client/Electron/src/actions/auth0/config.js`
+
+    - AUTH0_DOMAIN
+    - AUTH0_CLIENT_ID
+    - AUTH0_CLIENT_SECRET
+    (respectively)
+
+4. Go to 'APIs' -> [Your App Name] -> 'Settings'
+5. Copy
+    - Identifier
+
+    To `./Client/Electron/src/actions/auth0/config.js`
+
+    - AUTH0_API_AUDIENCE
+6. Run package manager
+```
+cd ./Client/Electron
+yarn
+```
+
+## Run app
+
+```
+yarn start
+```
+
+
+## Build
+### For Windows
+```
+yarn build:win
+```
+### For Mac
+```
+yarn build:mac
+```
+### For Linux
+```
+yarn build:linux
+```
