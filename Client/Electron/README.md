@@ -3,7 +3,7 @@
 Minimum starter kit for React-Redux desktop app featuring [Electron](https://electronjs.org/) and social login (Auth0)
 
 
-## Electron App setup (for development)
+## Electron App setup
 
 1. Sign in Auth0 account
 2. Go to 'Application' -> [Your App Name] -> 'Settings'

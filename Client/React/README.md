@@ -3,7 +3,7 @@
 Minimum starter kit for React-Redux web app bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) and social login (Auth0)
 
 
-## Web App setup (for development)
+## Web App setup
 
 
 1. Sign in Auth0 account

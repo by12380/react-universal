@@ -3,7 +3,7 @@
 Minimum starter kit for React-Redux mobile app bootstraped with [Expo Cli](https://expo.io/learn) and social login (Auth0)
 
 
-## Expo App setup (for development)
+## Expo App setup
 
 1. Sign in Auth0 account
 2. Go to 'Application' -> [Your App Name] -> 'Settings'
