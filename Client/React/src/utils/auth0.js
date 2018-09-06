@@ -5,7 +5,8 @@ import {
     AUTH0_DOMAIN,
     AUTH0_CLIENT_ID,
     AUTH0_API_AUDIENCE,
-    AUTH0_LOGIN_REDIRECT_URL } from '../config';
+    AUTH0_LOGIN_REDIRECT_URL,
+    AUTH0_LOGOUT_REDIRECT_URL } from '../config';
 
 export const logIn = () => {
 
@@ -24,7 +25,8 @@ export const logIn = () => {
 }
 
 export const logOut = () => {
-    const logoutUrl = `https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}`;
+    const logoutUrl =
+        `https://${AUTH0_DOMAIN}/v2/logout?client_id=${AUTH0_CLIENT_ID}&returnTo=${AUTH0_LOGOUT_REDIRECT_URL}`;
 
     //Redirect to logout page
     window.location.href = logoutUrl;
