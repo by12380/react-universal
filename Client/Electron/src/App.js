@@ -28,7 +28,8 @@ class App extends Component {
           <main>
             <div>
               <Route exact path="/login" render={() => !this.props.isAuthenticated ? <LogIn /> : <Redirect to='/' />} />
-              <Route path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
+              <Route exact path="/" render={() => this.props.isAuthenticated ? <Profile /> : <Redirect to='/login' />} />
+              <Route path="/" render={() => <Redirect to='/login' />} />
             </div>
           </main>
         </div>
