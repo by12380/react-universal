@@ -4,7 +4,7 @@ import {
     AUTH0_API_AUDIENCE,
     AUTH0_CLIENT_SECRET,
     AUTH0_LOGIN_REDIRECT_URL,
-    AUTH0_LOGOUT_REDIRECT_URL } from './config';
+    AUTH0_LOGOUT_REDIRECT_URL } from '../../config';
 
 import {
     loginPending,
