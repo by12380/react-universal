@@ -22,7 +22,8 @@ import {
 import {
     fetchUserPending,
     fetchUserSuccess,
-    fetchUserError } from '../userActions';
+    fetchUserError,
+    storeUser } from '../userActions';
 
 import { storeSession } from '../../utils/session';
 import { webAuth } from '../../utils/auth';
@@ -152,6 +153,7 @@ export const fetchUser = (accessToken) => (dispatch) => {
     })
     .then(user => {
         dispatch(fetchUserSuccess(user));
+        dispatch(storeUser(user));
     })
     .catch(error => {
         console.log(error);
