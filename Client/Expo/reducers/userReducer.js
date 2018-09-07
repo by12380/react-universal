@@ -37,6 +37,30 @@ const userReducer = (state = initialState, action) => {
             userSuccess: false,
             userError: true
         }
+
+    case 'STORE_USER_PENDING':
+        return {
+            ...state,
+            storePending: true,
+            storeSuccess: false,
+            storeError: false
+        }
+
+    case 'STORE_USER_SUCCESS':
+        return {
+            ...state,
+            storePending: false,
+            storeSuccess: true,
+            storeError: false
+        }
+
+    case 'STORE_USER_ERROR':
+        return {
+            ...state,
+            storePending: false,
+            storeSuccess: false,
+            storeError: true
+        }
     
     default:
         return state;

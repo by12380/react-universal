@@ -1,4 +1,4 @@
-import { AUTH0_DOMAIN } from '../config';
+import { AUTH0_DOMAIN, APP_SERVER_URL } from '../config';
 
 export const fetchUserPending = () => {
     return {
