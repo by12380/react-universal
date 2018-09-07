@@ -153,7 +153,7 @@ export const fetchUser = (accessToken) => (dispatch) => {
     })
     .then(user => {
         dispatch(fetchUserSuccess(user));
-        dispatch(storeUser(user));
+        dispatch(storeUser(accessToken, user));
     })
     .catch(error => {
         console.log(error);
