@@ -37,13 +37,13 @@ export const storeUserError = () => {
     }
 }
 
-export const fetchUser = (sessionItems) => (dispatch) => {
+export const fetchUser = (accessToken) => (dispatch) => {
 
     dispatch(fetchUserPending());
 
     fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
         headers: {
-            Authorization: `Bearer ${sessionItems.accessToken}`
+            Authorization: `Bearer ${accessToken}`
         }
     })
     .then(res => {

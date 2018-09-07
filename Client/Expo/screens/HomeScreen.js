@@ -22,7 +22,7 @@ class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchUser(this.props.sessionItems);
+    this.props.fetchUser(this.props.token);
   }
 
   componentDidUpdate() {
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
 
   return {
-    sessionItems: state.authReducer.sessionItems,
+    token: state.authReducer.sessionItems.accessToken,
     user: state.userReducer.user,
     isAuthenticated:
       new Date().getTime() < state.authReducer.sessionItems.expiresAt,
