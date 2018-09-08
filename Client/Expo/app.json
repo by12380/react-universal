@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "react-universal",
-    "description": "A very interesting project.",
+    "name": "React Universal",
+    "description": "Minimum react-redux starter kit (MERN) for desktop, mobile, and web app with social login feature.",
     "slug": "react-universal",
     "privacy": "public",
     "sdkVersion": "29.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
