@@ -1,8 +1,21 @@
 # React Universal App with Social Login Starter Kit
 
-Minimum react-redux starter kit (MERN) for desktop, mobile, and web app with social login feature.
+Minimum react-redux boilerplate (MERN) for desktop, mobile, and web app with social login feature.
 
 Inspired by creating universal apps like Slack, Skype, etc.
+
+## Demo
+[Web app](https://react-universal-web.herokuapp.com/)
+
+[Expo (mobile)](https://expo.io/appetize-simulator?url=https://expo.io/@by12380/react-universal)
+
+\* Instructions:  
+Click 'Tap to play' -> Open with Chrome -> Click 'Always' -> Scroll down the web page and Click 'Open project using Expo'.
+
+Electron app (download links):  
+[Mac](https://www.dropbox.com/s/2vnwx9dttz083or/react-universal-0.2.7.dmg?raw=1)
+[Windows](https://www.dropbox.com/s/o97syfutahencpg/react-universal%20Setup%200.2.7.exe?raw=1)
+[Linux](https://www.dropbox.com/s/zrd413nhrmhibqg/react-universal-0.2.7-x86_64.AppImage?raw=1)
 
 ## Features
 - React (Universal)
@@ -13,7 +26,7 @@ Inspired by creating universal apps like Slack, Skype, etc.
 - Mongo DB (Database) (optional)
 
 ## Social Login
-- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms all at once (Google, Facebook, Github, etc...)
+- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, etc...)
 
 ## Getting started
 ```
@@ -34,7 +47,7 @@ cd react-universal
 
     `http://localhost:3000/callback` (for Web and Electron app)
 
-    `https://auth.expo.io/[Your Expo Account Username]/react-universal` (for Expo app)
+    `https://auth.expo.io/@[Your Expo Account Username]/react-universal` (for Expo app)
     
     In 'Allowed Logout URLs', add
 
