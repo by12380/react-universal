@@ -305,3 +305,33 @@ export const removeSession = () => (dispatch) => {
     })
 
 }
+
+export const switchAccount = () => (dispatch) => {
+    const REDIRECT_URI = AuthSession.getRedirectUrl();
+    const scopes = ['offline_access', 'openid', 'profile', 'email'];
+
+    dispatch(loginPending());
+
+    AuthSession.startAsync({
+        authUrl:
+        `https://${AUTH0_DOMAIN}/authorize?` +
+        `&audience=${AUTH0_API_AUDIENCE}` +
+        `&scope=${encodeURIComponent(scopes.join(' '))}` +
+        `&response_type=code` +
+        `&client_id=${AUTH0_CLIENT_ID}` +
+        `&redirect_uri=${REDIRECT_URI}` +
+        `&prompt=login`
+    })
+    .then(result => {
+        if (result.type === 'success') {
+            dispatch(fetchAccessToken(result.params.code));
+            dispatch(loginSuccess());
+        } else {
+            dispatch(loginCancel());
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        dispatch(loginError());
+    })
+}
