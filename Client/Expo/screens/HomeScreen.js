@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { logout } from '../actions/authActions';
+import { logout, switchAccount } from '../actions/authActions';
 import { fetchUser } from '../actions/userActions';
 
 import { MonoText } from '../components/StyledText';
@@ -50,6 +50,7 @@ class HomeScreen extends React.Component {
               : null}
           </View>
           <Button onPress={this.onLogOut} title='Logout'></Button>
+          <Button onPress={this.onSwitchAccount} title='Switch Account'></Button>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -65,6 +66,10 @@ class HomeScreen extends React.Component {
 
   onLogOut = () => {
     this.props.logout();
+  }
+
+  onSwitchAccount = () => {
+    this.props.switchAccount();
   }
 
   redirectToLogin = () => {
@@ -161,7 +166,8 @@ const mapDispatchToProps = (dispatch) => {
 
   return bindActionCreators({
     fetchUser,
-    logout
+    logout,
+    switchAccount
   }, dispatch);
 
 };
