@@ -65,10 +65,10 @@ class HomeScreen extends React.Component {
   }
 
   onLogOut = () => {
-    this.props.logout();
+      this.props.logout();
   }
-
-  onSwitchAccount = () => {
+  onSwitchAccount = async () => {
+    await this.onLogOut() 
     this.props.switchAccount();
   }
 

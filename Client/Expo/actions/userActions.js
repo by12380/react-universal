@@ -64,6 +64,8 @@ export const fetchUser = (accessToken) => (dispatch) => {
 
 export const storeUser = (accessToken, user) => (dispatch) => {
 
+    console.log('user ',user);
+ 
     dispatch(storeUserPending());
 
     fetch(`${APP_SERVER_URL}/users/update`, {
@@ -73,7 +75,7 @@ export const storeUser = (accessToken, user) => (dispatch) => {
             authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-            email: user.email,
+            email: user.name,
         }),
     })
     .then(res => {

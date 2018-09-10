@@ -174,8 +174,7 @@ export const login = () => (dispatch) => {
 export const logout = () => (dispatch) => {
 
     dispatch(logoutPending());
-
-    fetch(`https://${AUTH0_DOMAIN}/v2/logout`)
+    return fetch(`https://${AUTH0_DOMAIN}/v2/logout`) //Not sure if I have to return the promise to make the await logOut work 
     .then(res => {
         dispatch(removeSession());
         dispatch(logoutSuccess());
@@ -307,6 +306,8 @@ export const removeSession = () => (dispatch) => {
 }
 
 export const switchAccount = () => (dispatch) => {
+
+    console.log('swithc') 
     const REDIRECT_URI = AuthSession.getRedirectUrl();
     const scopes = ['offline_access', 'openid', 'profile', 'email'];
 
