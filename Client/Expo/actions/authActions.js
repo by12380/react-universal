@@ -307,7 +307,6 @@ export const removeSession = () => (dispatch) => {
 
 export const switchAccount = () => (dispatch) => {
 
-    console.log('swithc') 
     const REDIRECT_URI = AuthSession.getRedirectUrl();
     const scopes = ['offline_access', 'openid', 'profile', 'email'];
 
