@@ -3,6 +3,7 @@ var express = require('express');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const cors =  require('cors');
+const socket = require('socket.io');
 
 var { PORT, DATABASE_URL } = require('./config');
 var usersRouter = require('./routes/users');
@@ -37,8 +38,16 @@ app.use(function(err, req, res, next) {
   res.json({error: true});
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Your app is listening on port ${PORT}`);
 });
 
-module.exports = app;
+const io = socket(server);
+
+io.on('connection', function(socket) {
+  socket.on('room', function(room) {
+      socket.join(room);
+  });
+});
+
+module.exports = { app, io };
