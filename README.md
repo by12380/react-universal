@@ -1,5 +1,7 @@
 # React Universal App with Social Login Starter Kit
 
+#Testing our commit
+
 Minimum react-redux boilerplate (MERN) for desktop, mobile, and web app with social login feature.
 
 Inspired by creating universal apps like Slack, Skype, etc.
@@ -24,10 +26,14 @@ Electron app (download links):
 - Expo (Mobile)
 - Express (App Server) (optional)
 - Mongo DB (Database) (optional)
+<<<<<<< HEAD
 - ReadMe contributions provided by Kevin and Elena
+=======
+- Amazing Edits by Shlomi and Val!! 
+>>>>>>> master
 
 ## Social Login
-- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, etc...)
+- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, Twitter, etc...)
 
 ## Getting started
 ```
@@ -49,7 +55,7 @@ cd react-universal
     `http://localhost:3000/callback` (for Web and Electron app)
 
     `https://auth.expo.io/@[Your Expo Account Username]/react-universal` (for Expo app)
-    
+
     In 'Allowed Logout URLs', add
 
     `http://localhost:3000/`
