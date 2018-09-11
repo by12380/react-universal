@@ -17,6 +17,8 @@ Electron app (download links):
 [Windows](https://www.dropbox.com/s/o97syfutahencpg/react-universal%20Setup%200.2.7.exe?raw=1)
 [Linux](https://www.dropbox.com/s/zrd413nhrmhibqg/react-universal-0.2.7-x86_64.AppImage?raw=1)
 
+#### [Todo app demo](https://react-todo-universal.herokuapp.com/)  
+
 ## Features
 - React (Universal)
 - Redux (Universal)
