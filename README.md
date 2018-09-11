@@ -26,11 +26,8 @@ Electron app (download links):
 - Expo (Mobile)
 - Express (App Server) (optional)
 - Mongo DB (Database) (optional)
-<<<<<<< HEAD
 - ReadMe contributions provided by Kevin and Elena
-=======
-- Amazing Edits by Shlomi and Val!! 
->>>>>>> master
+
 
 ## Social Login
 - [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, Twitter, etc...)
