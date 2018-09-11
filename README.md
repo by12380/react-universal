@@ -1,7 +1,5 @@
 # React Universal App with Social Login Starter Kit
 
-#Testing our commit
-
 Minimum react-redux boilerplate (MERN) for desktop, mobile, and web app with social login feature.
 
 Inspired by creating universal apps like Slack, Skype, etc.
@@ -26,8 +24,6 @@ Electron app (download links):
 - Expo (Mobile)
 - Express (App Server) (optional)
 - Mongo DB (Database) (optional)
-- ReadMe contributions provided by Kevin and Elena
-
 
 ## Social Login
 - [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, Twitter, etc...)
