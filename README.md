@@ -56,3 +56,6 @@ cd react-universal
 4.  Go to 'APIs' -> 'Create API'
 5.  Set 'Identifier' (ex. https://api.react-universal.com) -> Hit 'Create'
 6.  Go to 'Settings' -> Toggle 'Allow Offline Access' -> 'Save'
+
+## Comments
+Ken, Alvaro and Peter say "Hello!"
