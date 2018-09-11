@@ -29,7 +29,7 @@ Electron app (download links):
 - Amazing Edits by Shlomi and Val!! 
 
 ## Social Login
-- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, etc...)
+- [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, Twitter, etc...)
 
 ## Getting started
 ```
