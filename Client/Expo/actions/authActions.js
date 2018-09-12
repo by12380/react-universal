@@ -206,6 +206,8 @@ export const fetchAccessToken = (code) => (dispatch) => {
         }),
     })
     .then(res => {
+        if (res.status !== 200)
+            throw `failed to fetch access token with status ${res.status}`;
         return res.json();
     })
     .then(result => {
