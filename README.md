@@ -17,7 +17,10 @@ Electron app (download links):
 [Windows](https://www.dropbox.com/s/o97syfutahencpg/react-universal%20Setup%200.2.7.exe?raw=1)
 [Linux](https://www.dropbox.com/s/zrd413nhrmhibqg/react-universal-0.2.7-x86_64.AppImage?raw=1)
 
+<br />
 <img src="https://uc6b929b41eb1a1b58c7d390d002.dl.dropboxusercontent.com/cd/0/inline/AQQnJ4fy_ff7hPfZIIRFC_FY5vBHgPMIS7VhjuXP_f37V_30iLuYZu3tCrL9BUnJ9GZKx6K_4YCiHBvqohlfjRpMFkNZgaIk3mbnXloqoivuf_c48frhRRkK9i-GCsoLrgOXHEw-uhZ1mNYjSv6K3n5EOoO29p9suhT0bN_dvfieFdlZR5dC8ImMSRerGrS8xi0/file" width="1000px"/>
+<br />
+<br />
 
 #### [Todo app demo](https://react-todo-universal.herokuapp.com/)  
 
