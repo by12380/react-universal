@@ -21,15 +21,13 @@ class HomeScreen extends React.Component {
     header: null,
   };
 
-  componentDidMount() {
-    this.props.fetchUser(this.props.token);
-  }
-
   componentDidUpdate() {
     this.redirectToLogin();
   }
 
   render() {
+    this.props.fetchUser(this.props.token);
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
