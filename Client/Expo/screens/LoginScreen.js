@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
-import { login, refreshAccessToken } from '../actions/authActions';
+import { login, refreshAccessToken } from '../actions/auth0';
 
 class LoginScreen extends React.Component {
 

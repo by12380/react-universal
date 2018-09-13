@@ -37,31 +37,6 @@ export const storeUserError = () => {
     }
 }
 
-export const fetchUser = (accessToken) => (dispatch) => {
-
-    dispatch(fetchUserPending());
-
-    fetch(`https://${AUTH0_DOMAIN}/userinfo`, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        }
-    })
-    .then(res => {
-        if (res.status !== 200)
-            throw `failed to get user profile with status ${res.status}`;
-        return res.json();
-    })
-    .then(user => {
-        dispatch(fetchUserSuccess(user));
-        dispatch(storeUser(accessToken, user));
-    })
-    .catch(error => {
-        console.log(error);
-        dispatch(fetchUserError());
-    })
-
-}
-
 export const storeUser = (accessToken, user) => (dispatch) => {
 
     dispatch(storeUserPending());
