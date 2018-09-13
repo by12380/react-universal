@@ -60,7 +60,6 @@ export const getTokensFromAuthCallback = () => {
             ...hashParams,
             ...queryParams
         }
-        console.log(params);
         if (params && params.access_token) {
             //Add a new field 'expiresAt' that gives the datetime the token expires.
             params.expires_at = JSON.stringify((params.expires_in * 1000) + new Date().getTime());
