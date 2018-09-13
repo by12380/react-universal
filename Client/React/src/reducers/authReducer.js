@@ -1,4 +1,17 @@
-const authReducer = (state = {}, action) => {
+const initialState = {
+    success: false,
+    error: false,
+    refreshPending: false,
+    refreshSuccess: false,
+    refreshError: false,
+    sessionItems: {
+        accessToken: '',
+        refreshToken: '',
+        expiresAt: ''
+    }
+}
+
+const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
