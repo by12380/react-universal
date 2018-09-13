@@ -11,7 +11,7 @@ App server for [React Universal](https://github.com/by12380/react-universal) app
 3. Copy
     - Domain
 
-    To `./Client/Expo/config.js`
+    To `./Server/config.js`
 
     - AUTH0_DOMAIN
 
@@ -19,7 +19,7 @@ App server for [React Universal](https://github.com/by12380/react-universal) app
 5. Copy
     - Identifier
 
-    To `./Client/Expo/config.js`
+    To `./Server/config.js`
 
     - AUTH0_API_AUDIENCE
 6. Run package manager
