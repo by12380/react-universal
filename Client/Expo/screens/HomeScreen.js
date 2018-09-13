@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { logout, switchAccount } from '../actions/authActions';
-import { fetchUser } from '../actions/userActions';
+import { logout, switchAccount, fetchUser } from '../actions/auth0';
 
 import { MonoText } from '../components/StyledText';
 
