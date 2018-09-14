@@ -1,4 +1,5 @@
 import { getSessionAsync, removeSessionAsync } from '../utils/session';
+import { fetchUser } from './auth0';
 
 export const loginPending = () => {
     return {
