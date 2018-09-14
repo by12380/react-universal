@@ -21,7 +21,12 @@ Electron app (download links):
 <img src="demo.gif" width="1000px"/>
 <br />
 
-#### [Todo app demo](https://react-todo-universal.herokuapp.com/)  
+## Sample app using React Universal
+### [Todos app demo](https://react-todo-universal.herokuapp.com/)
+
+<br />
+<img src="https://raw.githubusercontent.com/by12380/react-todo-universal/master/todos-demo.gif" width="1000px"/>
+<br />
 
 ## Features
 - React (Universal)
