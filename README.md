@@ -36,6 +36,7 @@ Electron app (download links):
 - Express (App Server) (optional)
 - Mongo DB (Database) (optional)
 - Automatic re-login (session storage)
+- Sync app across all devices (Socket.io)
 
 ## Social Login
 - [Auth0](https://auth0.com/) (Default setup) - to demonstrate multiple social login platforms (Google, Facebook, Github, Twitter, etc...)
