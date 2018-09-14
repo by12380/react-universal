@@ -2,6 +2,7 @@ const express = require('express');
 
 const { User } = require('../models/user');
 const { checkJwt } = require('../middlewares/auth');
+const Subscriber = require('../utils/Subscriber');
 
 const router = express.Router();
 
@@ -24,6 +25,9 @@ router.post('/update', checkJwt, async function(req, res){
           }
         );
         res.status(200).json(user_db);
+
+        //Example of using subscriber to trigger certain actions on the client side.
+        Subscriber.io.to(req.user.sub).emit('subscribe', { type: 'USER_STORED', message: 'User stored!' });
     }
     catch(e)
     {
