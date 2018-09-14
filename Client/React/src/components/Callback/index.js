@@ -2,6 +2,7 @@ import Callback from "./component";
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { loginSuccess, loginError, refreshTokenError } from '../../actions/authActions';
+import { fetchUser } from '../../actions/auth0';
 
 const mapStateToProps = (state) => {
 
@@ -18,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     loginSuccess,
     loginError,
-    refreshTokenError
+    refreshTokenError,
+    fetchUser
   }, dispatch);
 
 }
