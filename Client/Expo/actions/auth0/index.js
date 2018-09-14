@@ -100,6 +100,7 @@ export const fetchAccessToken = (code) => (dispatch) => {
             accessToken: result.access_token,
             refreshToken: result.refresh_token
         }
+        dispatch(fetchUser(sessionItems.accessToken));
         dispatch(storeSession(sessionItems));
         dispatch(fetchAccessTokenSuccess(sessionItems));
     })
