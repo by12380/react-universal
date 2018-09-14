@@ -1,4 +1,5 @@
 import { getSessionItemsAsync, setSessionAsync, clearSessionAsync } from '../utils/session';
+import { fetchUser } from './auth0';
 
 export const loginPending = () => {
     return {
@@ -141,6 +142,7 @@ export const loadSession = () => (dispatch) => {
     getSessionItemsAsync()
     .then(sessionItems => {
         if (sessionItems.accessToken !== null) {
+            dispatch(fetchUser(sessionItems.accessToken));
             dispatch(loadSessionSuccess(sessionItems));
         } else {
             dispatch(loadSessionError());

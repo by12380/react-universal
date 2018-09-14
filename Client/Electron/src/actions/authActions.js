@@ -105,6 +105,7 @@ export const loadSession = () => (dispatch) => {
     .then(sessionItems => {
         //Check if sessionItems is {} (empty)
         if (Object.keys(sessionItems).length === 0 && sessionItems.constructor === Object) {
+            dispatch(fetchUser(sessionItems.accessToken));
             dispatch(loadSessionError());
         } else {
             dispatch(loadSessionSuccess(sessionItems));

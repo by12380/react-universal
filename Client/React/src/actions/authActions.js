@@ -1,8 +1,8 @@
 import { storeSession, getSession, clearSession } from '../utils/session';
 import { fetchUser } from './auth0';
 
-export const loginSuccess = (sessionItems) => {
-    fetchUser(sessionItems.accessToken);
+export const loginSuccess = (dispatch) => (sessionItems) => {
+    dispatch(fetchUser(sessionItems.accessToken));
     storeSession(sessionItems);
     return {
         type: 'LOGIN_SUCCESS',
@@ -68,6 +68,7 @@ export const loadSession = () => (dispatch) => {
     if (Object.keys(sessionItems).length === 0 && sessionItems.constructor === Object) {
         dispatch(loadSessionError());
     } else {
+        dispatch(fetchUser(sessionItems.accessToken));
         dispatch(loadSessionSuccess(sessionItems));
     }
 }

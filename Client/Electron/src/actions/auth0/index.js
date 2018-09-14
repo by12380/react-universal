@@ -188,8 +188,8 @@ const _fetchAccessToken = (code) => (dispatch) => {
             accessToken: result.access_token,
             refreshToken: result.refresh_token
         }
-        fetchUser(sessionItems.accessToken);
         storeSession(sessionItems);
+        dispatch(fetchUser(sessionItems.accessToken));
         dispatch(fetchAccessTokenSuccess(sessionItems));
     })
     .catch(error => {
