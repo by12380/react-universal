@@ -1,7 +1,7 @@
 import { storeSession, getSession, clearSession } from '../utils/session';
 import { fetchUser } from './auth0';
 
-export const loginSuccess = (dispatch) => (sessionItems) => {
+export const loginSuccess = (sessionItems) => (dispatch) => {
     dispatch(fetchUser(sessionItems.accessToken));
     storeSession(sessionItems);
     return {
