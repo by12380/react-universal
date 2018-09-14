@@ -44,6 +44,8 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server);
 
+io.origins("*:*");
+
 io.sockets.on('connection', function(socket) {
   socket.on('room', function(room) {
       socket.join(room);
