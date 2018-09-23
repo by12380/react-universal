@@ -1,0 +1,215 @@
+html, body {
+    min-height: 100vh;
+}
+
+.main-page {
+    background: url('../assets/night-sky.jpg');
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; 
+}
+
+.main-page button {
+    font-size: 18px;
+}
+
+.main-page .fa-github {
+    font-size: 30px;
+    vertical-align: middle;
+    padding-right: 10px;
+    position: relative;
+    bottom: 3px;
+}
+
+.navbar {
+    background-color: transparent !important;
+}
+
+.navbar .fa-github {
+    font-size: 26px;
+    vertical-align: middle;
+}
+
+.title-container {
+    height: 100vh;
+    position: relative;
+}
+
+.title {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title > h1 {
+    font-size: 80px;
+}
+
+.title > h2 {
+    font-size: 26px;
+}
+
+.planet-container {
+    position: relative;
+    height: 100%;
+}
+
+.planet-container > img {
+    position: absolute;
+    max-height: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.intro-header {
+    font-size: 50px;
+}
+
+.intro-content {
+    font-size: 26px;
+    line-height: 150%;
+}
+
+.show-me-btn {
+    font-size: 20px;
+    border-radius: 50px;
+    padding: 0 50px 0 50px;
+}
+
+.show-me-content {
+    margin-top: 50px;
+    padding: 80px;
+    background-image: linear-gradient(rgb(183, 220, 255), rgb(235, 245, 252));
+}
+
+.show-me-content img {
+    padding: 20px;
+}
+
+.show-me-content button {
+    font-size: 20px !important;
+    border-radius: 50px !important;
+}
+
+.todos-header {
+    font-size: 90px;
+    letter-spacing: 5px;
+    font-weight: 400;
+}
+
+.todos-sub-header {
+    color: #575656;
+}
+
+.todos-container > h3 {
+    line-height: 150%;
+}
+
+.todos-container > h3 > span {
+    font-weight: 500;
+}
+
+.todos-links > img {
+    margin: 10px;
+}
+
+.view-web-btn {
+    margin: 10px;
+    width: 244.5px;
+    height: 72px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    position: relative;
+    line-height: 68px;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0 10px 0 10px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.view-web-btn .fa-chrome {
+    font-size: 36px;
+    position: relative;
+    top: 5px;
+    padding-right: 8px;
+}
+
+.download-desktop-btn {
+    margin: 10px;
+    width: 244.5px;
+    height: 72px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    position: relative;
+    line-height: 68px;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0 10px 0 10px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.download-desktop-btn .fa-download {
+    font-size: 36px;
+    position: relative;
+    top: 8px;
+    padding-right: 3px;
+}
+
+.view-github-btn {
+    margin: 10px;
+    width: 244.5px;
+    height: 72px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    position: relative;
+    line-height: 68px;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0 10px 0 10px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.view-github-btn .fa-github {
+    font-size: 50px;
+    position: relative;
+    top: 8px;
+    padding-right: 3px;
+}
+
+.support-container {
+    background: linear-gradient(rgb(1, 16, 37), rgb(2, 29, 48));
+    color: white;
+}
+
+.support-container h1 {
+    font-size: 70px;
+    font-weight: 400;
+}
+
+.arc-img {
+    transform: rotate(180deg);
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    .navbar.scrolling-navbar.top-nav-collapse {
+        background-color: rgb(66, 134, 244, 0.8) !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .planet-container {
+        display: none;
+    }
+}
