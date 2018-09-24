@@ -113,8 +113,10 @@
                 <a href="https://react-universal-web.herokuapp.com/" target="_blank">
                     <button class="btn btn-outline-info waves-effect mx-3" type="button">Web Demo</button>
                 </a>
-                <button class="btn btn-outline-info waves-effect mx-3" type="button">Mobile Demo</button>
-                <button class="btn btn-outline-info waves-effect mx-3" type="button">Desktop Demo</button>
+                <a href="https://expo.io/appetize-simulator?url=https://expo.io/@by12380/react-universal" target="_blank">
+                    <button class="btn btn-outline-info waves-effect mx-3" type="button">Mobile Demo</button>
+                </a>
+                <button class="btn btn-outline-info waves-effect mx-3" type="button" data-toggle="modal" data-target="#ruModalSm">Desktop Demo</button>
             </div>
             <!-- / Collapsible element -->
             </div>
@@ -144,10 +146,13 @@
                         </a>
                         <img width="244px" src="assets/appStore.svg" />
                         <img width="244px" src="assets/googlePlay.svg" />
-                        <div class="download-desktop-btn">
-                            <i class="fa fa-download" aria-hidden="true"></i>
-                            Desktop Version
-                        </div>
+                        <a href="#" data-toggle="modal" data-target="#todosModalSm">
+                            <div class="download-desktop-btn">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                                Desktop Version
+                            </div>
+                        </a>
+                        
                         <a href="https://github.com/by12380/react-todo-universal" target="_blank">
                             <div class="view-github-btn">
                                 <i class="fa fa-github" aria-hidden="true"></i>
@@ -168,11 +173,72 @@
             <div class="col-md-6">
                 <div class="text-center my-5">
                     <h1>HOW YOU CAN SUPPORT US</h1>
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                    <h4 class="mt-3">Star Us</h4>
                 </div>
             </div>
             <div class="col-md-3"></div>
         </div>
     </div>
+
+
+    <!-- React Universal Desktop Download Modal -->
+    <div class="modal fade" id="ruModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content ru-modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <a href="https://www.dropbox.com/s/2vnwx9dttz083or/react-universal-0.2.7.dmg?raw=1" class="mx-auto">
+                    <div class="ru-download-btn text-center mt-5">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Mac
+                    </div>
+                </a>
+                <a href="https://www.dropbox.com/s/o97syfutahencpg/react-universal%20Setup%200.2.7.exe?raw=1" class="mx-auto">
+                    <div class="ru-download-btn text-center my-2">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Windows
+                    </div>
+                </a>
+                <a href="https://www.dropbox.com/s/zrd413nhrmhibqg/react-universal-0.2.7-x86_64.AppImage?raw=1" class="mx-auto">
+                    <div class="ru-download-btn text-center mb-5">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Linux
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- React Universal Desktop Download Modal -->
+
+    <!-- React Universal Desktop Download Modal -->
+    <div class="modal fade" id="todosModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content todos-modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <a href="https://www.dropbox.com/s/uamywmwrnjctmsg/react-todo-universal-0.2.7.dmg?raw=1" class="mx-auto">
+                    <div class="ru-download-btn text-center mt-5">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Mac
+                    </div>
+                </a>
+                <a href="https://www.dropbox.com/s/zwzuevd69vgityj/react-todo-universal%20Setup%200.2.7.exe?raw=1" class="mx-auto">
+                    <div class="ru-download-btn text-center mb-5">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Windows
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- React Universal Desktop Download Modal -->
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

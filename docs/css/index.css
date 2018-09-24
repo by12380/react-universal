@@ -93,6 +93,35 @@ html, body {
     border-radius: 50px !important;
 }
 
+.ru-download-btn {
+    margin: 10px;
+    width: 244.5px;
+    height: 72px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    position: relative;
+    line-height: 68px;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0 10px 0 10px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ru-download-btn .fa-download {
+    font-size: 36px;
+    position: relative;
+    top: 8px;
+    padding-right: 8px;
+}
+
+.ru-modal-content {
+    border-radius: 20px !important;
+    background-image: linear-gradient(45deg, rgb(114, 175, 224), rgb(176, 233, 255));
+}
+
 .todos-header {
     font-size: 90px;
     letter-spacing: 5px;
@@ -113,6 +142,11 @@ html, body {
 
 .todos-links > img {
     margin: 10px;
+}
+
+.todos-modal-content {
+    border-radius: 20px !important;
+    background-image: linear-gradient(45deg, rgb(230, 151, 32), rgb(255, 247, 176));
 }
 
 .view-web-btn {
@@ -195,6 +229,16 @@ html, body {
 .support-container h1 {
     font-size: 70px;
     font-weight: 400;
+}
+
+.support-container .fa-github {
+    font-size: 180px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.support-container .fa-github:hover {
+    color: rgb(253, 251, 183)
 }
 
 .arc-img {
