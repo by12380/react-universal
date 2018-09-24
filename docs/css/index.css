@@ -246,10 +246,8 @@ html, body {
     width: 100%;
 }
 
-@media (min-width: 600px) {
-    .navbar.scrolling-navbar.top-nav-collapse {
-        background-color: rgb(66, 134, 244, 0.8) !important;
-    }
+.navbar.scrolling-navbar.top-nav-collapse {
+    background-color: rgb(66, 134, 244, 0.8) !important;
 }
 
 @media only screen and (max-width: 768px) {
