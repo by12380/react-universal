@@ -1,6 +1,6 @@
 # React Universal App with Social Login Starter Kit
 
-Minimum react-redux boilerplate (MERN) for desktop, mobile, and web app with social login feature.
+Minimal react-redux boilerplate (MERN) for desktop, mobile, and web app with social login feature.
 
 Inspired by creating universal apps like Slack, Skype, etc.
 
