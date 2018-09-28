@@ -173,6 +173,30 @@ html, body {
     padding-right: 8px;
 }
 
+.view-mobile-btn {
+    margin: 10px;
+    width: 244.5px;
+    height: 72px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    position: relative;
+    line-height: 68px;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 0 10px 0 10px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.view-mobile-btn .fa-mobile {
+    font-size: 40px;
+    position: relative;
+    top: 5px;
+    padding-right: 8px;
+}
+
 .download-desktop-btn {
     margin: 10px;
     width: 244.5px;
