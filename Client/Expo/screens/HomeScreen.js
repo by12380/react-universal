@@ -20,12 +20,14 @@ class HomeScreen extends React.Component {
     header: null,
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.redirectToLogin();
+    if (this.props.token !== prevProps.token) {
+      this.props.fetchUser(this.props.token);
+    }
   }
 
   render() {
-    this.props.fetchUser(this.props.token);
 
     return (
       <View style={styles.container}>
