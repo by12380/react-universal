@@ -272,6 +272,7 @@ html, body {
 }
 
 .navbar.scrolling-navbar.top-nav-collapse {
+    background-color: rgb(66, 134, 244) !important;
     background-color: rgb(66, 134, 244, 0.8) !important;
 }
 
