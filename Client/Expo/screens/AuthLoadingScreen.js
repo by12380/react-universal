@@ -46,8 +46,7 @@ const mapStateToProps = (state) => {
 
   return {
     isAuthenticated:
-      new Date().getTime() <
-      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
+      new Date().getTime() < state.authReducer.sessionItems.expiresAt,
   };
 
 };
