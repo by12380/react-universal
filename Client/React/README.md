@@ -12,7 +12,7 @@ Minimum starter kit for React-Redux web app bootstrapped with [Create React App]
     - Domain
     - Client ID
 
-    To `./Client/Expo/config.js`
+    To `./Client/React/src/config.js`
 
     - AUTH0_DOMAIN
     - AUTH0_CLIENT_ID
@@ -22,7 +22,7 @@ Minimum starter kit for React-Redux web app bootstrapped with [Create React App]
 5. Copy
     - Identifier
 
-    To `./Client/Expo/config.js`
+    To `./Client/React/src/config.js`
 
     - AUTH0_API_AUDIENCE
 6. Run package manager
