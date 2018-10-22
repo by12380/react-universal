@@ -37,6 +37,7 @@ export const storeUserError = () => {
     }
 }
 
+/* Stores a copy of the user's profile in our own backend server */
 export const storeUser = (accessToken, user) => (dispatch) => {
 
     dispatch(storeUserPending());

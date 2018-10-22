@@ -1,3 +1,6 @@
+/* Actions in this module contains implemetations specific
+to auth0 endpoints and workflow */
+
 import { AuthSession } from 'expo';
 import { 
     AUTH0_DOMAIN,
