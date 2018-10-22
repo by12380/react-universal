@@ -65,8 +65,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated:
-      new Date().getTime() <
-      (state.authReducer.sessionItems ? state.authReducer.sessionItems.expiresAt : null),
+      new Date().getTime() < state.authReducer.sessionItems.expiresAt,
     user_id: state.userReducer.user.sub,
     socketConnected: state.socketReducer.connectSuccess,
     roomJoined: state.socketReducer.joinRoomSuccess
