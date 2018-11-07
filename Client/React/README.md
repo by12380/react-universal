@@ -27,7 +27,7 @@ Minimum starter kit for React-Redux web app bootstrapped with [Create React App]
     - AUTH0_API_AUDIENCE
 6. Run package manager
 ```
-cd ./Client/Electron
+cd ./Client/React
 yarn
 ```
 \* Steps 1-5 is for using Auth0 as our social login platform
