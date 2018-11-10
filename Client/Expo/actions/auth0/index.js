@@ -31,7 +31,7 @@ import {
 
 export const login = () => (dispatch) => {
     const REDIRECT_URI = AuthSession.getRedirectUrl();
-    const scopes = ['offline_access', 'openid', 'profile'];
+    const scopes = ['offline_access', 'openid', 'profile', 'email'];
 
     dispatch(loginPending());
 
